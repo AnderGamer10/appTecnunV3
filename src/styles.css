@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body {
+  background: linear-gradient(
+    90deg,
+    rgba(18, 221, 198, 1) 0%,
+    rgba(4, 132, 194, 1) 35%,
+    rgba(12, 165, 190, 1) 74%
+  );
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* *{
+    font-size: 20px;
+} */
+h3{
+  font-size: 20px;
+}

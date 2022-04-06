@@ -1,0 +1,183 @@
+/* Div principal del formulario */
+#mainForm {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Div preguntas --> Todo aqui dentro */
+#divQuestions {
+    background-color: rgba(0, 0, 0, 0.03);
+    width: auto;
+    min-width: 920px;
+    max-width: 1200px;
+    min-height: 700px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 60px;
+    border-radius: 20px;
+    padding-bottom: 30px;
+    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+}
+
+/* Header de la zona de preguntas */
+#header {
+    height: 134px;
+}
+
+#header img {
+    width: 100px;
+    height: 80px;
+    margin-left: 30px;
+    margin-top: 20px;
+    position: absolute;
+}
+
+#header h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 1rem;
+}
+
+#header span {
+    font-size: 12px;
+}
+
+
+
+/* Fases de preguntas */
+#questions {
+    height: auto;
+    min-height: 73%;
+    width: 95%;
+    margin: auto;
+}
+
+#fasePrincipal {
+    width: 80%;
+    margin: auto;
+}
+
+#FaseInfo {
+    width: 80%;
+    margin: auto;
+}
+
+#ultimaFase {
+    width: 80%;
+    margin: auto;
+}
+
+/* Submit */
+#final {
+    text-align: center;
+}
+
+#final img {
+    width: 120px;
+    height: 100px;
+}
+
+#final button {
+    margin: 5px;
+    margin-top: 20px;
+}
+
+select {
+    width: auto;
+}
+
+.challenge {
+    width: 100%;
+}
+
+.challenge textarea {
+    height: 150px;
+}
+
+.email {
+    width: 60%;
+}
+
+mat-form-field {
+    margin: 5px;
+}
+
+/* Estilos de las preguntas */
+td {
+    text-align: center;
+}
+
+thead {
+    text-align: center;
+}
+
+.radioGroup {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+}
+
+.radioButton {
+    margin: 5px;
+}
+
+.l4q3 {
+    margin: 12px 0;
+}
+
+.l4q8Section {
+    margin: 12px 0;
+}
+
+.checkboxMargin {
+    margin: 0 12px;
+}
+
+ul {
+    list-style-type: none;
+    margin-top: 4px;
+}
+
+/* Controls */
+.controls {
+    text-align: center;
+    height: 12%;
+    width: auto;
+    margin: auto;
+}
+
+.controls #lb {
+    padding-right: 10px;
+    font-size: 1rem;
+    margin-left: -15px;
+}
+
+.controls a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #f1f1f1;
+    color: black;
+    border-radius: 50%;
+}
+
+.controls a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+@media (max-width: 1000px) {
+    #divQuestions {
+        width: 100%;
+        margin-top: 60px;
+        min-height: 800px;
+    }
+}
+
+@media (max-width: 1400px) {
+    #info {
+        margin-left: 3%;
+    }
+}
+
