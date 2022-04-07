@@ -1,4 +1,4 @@
-<div *ngIf="mostrar" id="mainForm">
+<div *ngIf="_router.url === '/form'" id="mainForm">
     <div id="divQuestions" class="bg-light">
         <div id="header">
             <img src="./assets/images/logo.png" alt="">
@@ -68,19 +68,22 @@
                 <div>
                     <div [ngStyle]="{'display': paginaActual === 2 ? 'block' : 'none'}">
                         <p>L1</p>
-                        <div *ngFor="let mainItem of L1"> </div>
+                        <div *ngFor="let mainItem of filtrarSubdimension('L1')"> </div>
                     </div>
+
                     <div [ngStyle]="{'display': paginaActual === 3 ? 'block' : 'none'}">
                         <p>L2</p>
-                        <div *ngFor="let mainItem of L2"> </div>
+                        <div *ngFor="let mainItem of filtrarSubdimension('L2')"> </div>
                     </div>
+
                     <div [ngStyle]="{'display': paginaActual === 4 ? 'block' : 'none'}">
                         <p>L3</p>
-                        <div *ngFor="let mainItem of L3"> </div>
+                        <div *ngFor="let mainItem of filtrarSubdimension('L3')"> </div>
                     </div>
+
                     <div [ngStyle]="{'display': paginaActual === 5 ? 'block' : 'none'}">
                         <p>L4</p>
-                        <div *ngFor="let mainItem of L4">
+                        <div *ngFor="let mainItem of filtrarSubdimension('L4')">
                             <h3><b>{{mainItem.pregunta}}</b></h3>
                             <div *ngIf="mainItem.tipoPregunta === 'table'">
                                 <table class="table table-sm table-hover">
@@ -96,7 +99,7 @@
                                             <td
                                                 *ngFor="let item of filtrarTablaPreguntas(mainItem.preguntaId); let i = index">
                                                 <input type="radio" name="{{mainItem.preguntaId}}a{{itemElemento.valor}}"
-                                                    value="{{i}}">
+                                                    value="{{i+1}}">
                                             </td>
                                         </tr>
                                     </tbody>
@@ -104,16 +107,27 @@
                             </div>
                             <div *ngIf="mainItem.tipoPregunta === 'radio'">
                                 <mat-radio-group aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
-                                    <mat-radio-button name="{{item}}" class="radioButton"
+                                    <mat-radio-button name="{{mainItem.preguntaId}}" class="radioButton"
                                         *ngFor="let item of filtrarElementos(mainItem.preguntaId)" [value]="item.valor">
                                         {{item.elemento}}
                                     </mat-radio-button>
                                 </mat-radio-group>
                             </div>
-                            <!-- <div *ngIf="mainItem.tipoPregunta === 'checkbox'">
-                                <section class="l4q3">
-                                    <p *ngFor="let item of elementos"><mat-checkbox formControlName="{{item.elemento}}">{{item.elemento}}</mat-checkbox></p>
+                            <div *ngIf="mainItem.tipoPregunta === 'checkbox'">
+                                <section class="{{mainItem.preguntaId}}">
+                                    <p *ngFor="let item of filtrarElementos(mainItem.preguntaId)"><mat-checkbox value="{{item.elemento}}" (change)="mostrarDatos()" name="{{mainItem.preguntaId}}">{{item.elemento}}</mat-checkbox></p>
                                 </section>
+                            </div>
+                            <!-- <div *ngIf="mainItem.tipoPregunta === 'mix'">
+                                <mat-radio-group aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
+                                    <mat-radio-button name="{{item}}" class="radioButton"
+                                        *ngFor="let item of filtrarElementos(mainItem.preguntaId)" [value]="item.valor">
+                                        {{item.elemento}}
+                                    </mat-radio-button>
+                                    <section class="{{mainItem.preguntaId}}">
+                                        <p *ngFor="let item of filtrarElementos(mainItem.preguntaId)"><mat-checkbox formControlName="{{item.elemento}}">{{item.elemento}}</mat-checkbox></p>
+                                    </section>
+                                </mat-radio-group>
                             </div> -->
                         </div>
                     </div>
@@ -124,16 +138,16 @@
                     <div id="final">
                         <p>Thank you</p>
                         <img src="./assets/images/logo.png" height=150 width=150> <br>
-                        <button class="submit" type="button" value="Submit">Submit</button>
+                        <button (click)="postData();" class="submit" type="button" value="Submit">Submit</button>
                     </div>
                 </div>
             </form>
         </div>
         <div class="controls">
-            <a (click)="rePag()" href="#" class="previous">&#8249;</a>
+            <a (click)="rePag()" href="javascript:void(0);" class="previous">&#8249;</a>
             <label id="lb" for="file"></label>
             <progress id="file" max="100" value="0"></progress>
-            <a (click)="avPag()" href="#" class="next">&#8250;</a>
+            <a (click)="avPag();" href="javascript:void(0);" class="next">&#8250;</a>
         </div>
     </div>
 </div>
