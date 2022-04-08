@@ -1,0 +1,67 @@
+
+/* Fases de preguntas */
+#questions {
+    height: auto;
+    min-height: 73%;
+    width: 95%;
+    margin: auto;
+}
+
+#fasePrincipal {
+    width: 80%;
+    margin: auto;
+}
+
+#FaseInfo {
+    width: 80%;
+    margin: auto;
+}
+
+#ultimaFase {
+    width: 80%;
+    margin: auto;
+}
+
+/* Submit */
+#final {
+    text-align: center;
+}
+
+#final img {
+    width: 120px;
+    height: 100px;
+}
+
+#final button {
+    margin: 5px;
+    margin-top: 20px;
+}
+
+/* Estilos de las preguntas */
+td {
+    text-align: center;
+}
+
+thead {
+    text-align: center;
+}
+
+.radioGroup {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+}
+
+.radioButton {
+    margin: 5px;
+}
+
+ul {
+    list-style-type: none;
+    margin-top: 4px;
+}
+
+
+
+
