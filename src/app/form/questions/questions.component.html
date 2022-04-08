@@ -1,0 +1,92 @@
+<!-- Fase informacion -->
+<div *ngIf="paginaActual === 1" id="FaseInfo">
+    <h5>In order to answer the following questions use the following scale:</h5> <br>
+    <b>1.</b> The policy or action is still not considered <br>
+    <b>2.</b> A plan to implement the action or policy is being developed but it is in the early stage
+    <br>
+    <b>3.</b> The policy/action has been underway for some time <br>
+    <b>4.</b> The policy/action is monitored to assess the efficiency and impact on the city <br>
+    <b>5.</b> The implementation of the policy or action is completely optimized and continuously
+    improved
+    that
+    leads to using the resource efficiently
+</div>
+<!-- Preguntas -->
+<div>
+    <div [ngStyle]="{'display': paginaActual === 2 ? 'block' : 'none'}">
+        <p>L1</p>
+        <div *ngFor="let mainItem of filtrarSubdimension('L1')"> </div>
+    </div>
+
+    <div [ngStyle]="{'display': paginaActual === 3 ? 'block' : 'none'}">
+        <p>L2</p>
+        <div *ngFor="let mainItem of filtrarSubdimension('L2')"> </div>
+    </div>
+
+    <div [ngStyle]="{'display': paginaActual === 4 ? 'block' : 'none'}">
+        <p>L3</p>
+        <div *ngFor="let mainItem of filtrarSubdimension('L3')"> </div>
+    </div>
+
+    <div [ngStyle]="{'display': paginaActual === 5 ? 'block' : 'none'}">
+        <p>L4</p>
+        <div *ngFor="let mainItem of filtrarSubdimension('L4')">
+            <h3><b>{{mainItem.pregunta}}</b></h3>
+            <div *ngIf="mainItem.tipoPregunta === 'table'">
+                <table class="table table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let item of filtrarTablaPreguntas(mainItem.preguntaId)">
+                                {{item.elementoPregunta}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let itemElemento of filtrarElementos(mainItem.preguntaId)">
+                            <td>{{itemElemento.elemento}}</td>
+                            <td *ngFor="let item of filtrarTablaPreguntas(mainItem.preguntaId); let i = index">
+                                <input type="radio" name="{{mainItem.preguntaId}}a{{itemElemento.valor}}"
+                                    value="{{i+1}}">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="mainItem.tipoPregunta === 'radio'">
+                <mat-radio-group aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
+                    <mat-radio-button name="{{mainItem.preguntaId}}" class="radioButton"
+                        *ngFor="let item of filtrarElementos(mainItem.preguntaId)" [value]="item.valor">
+                        {{item.elemento}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div *ngIf="mainItem.tipoPregunta === 'checkbox'">
+                <section class="{{mainItem.preguntaId}}">
+                    <p *ngFor="let item of filtrarElementos(mainItem.preguntaId)">
+                        <mat-checkbox value="{{item.elemento}}" (change)="mostrarDatos()"
+                            name="{{mainItem.preguntaId}}">{{item.elemento}}</mat-checkbox>
+                    </p>
+                </section>
+            </div>
+            <!-- <div *ngIf="mainItem.tipoPregunta === 'mix'">
+                    <mat-radio-group aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
+                        <mat-radio-button name="{{item}}" class="radioButton"
+                            *ngFor="let item of filtrarElementos(mainItem.preguntaId)" [value]="item.valor">
+                            {{item.elemento}}
+                        </mat-radio-button>
+                        <section class="{{mainItem.preguntaId}}">
+                            <p *ngFor="let item of filtrarElementos(mainItem.preguntaId)"><mat-checkbox formControlName="{{item.elemento}}">{{item.elemento}}</mat-checkbox></p>
+                        </section>
+                    </mat-radio-group>
+                </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- Ultima Fase - Agradecimiento -->
+<div *ngIf="paginaActual === 12" id="ultimaFase">
+    <div id="final">
+        <p>Thank you</p>
+        <img src="./assets/images/logo.png" height=150 width=150> <br>
+        <button (click)="postData();" class="submit" type="button" value="Submit">Submit</button>
+    </div>
+</div>

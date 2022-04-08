@@ -11,9 +11,10 @@ import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
 import { ChartsComponent } from './charts/charts.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QuestionsComponent } from './form/questions/questions.component';
 
 @NgModule({
-  declarations: [AppComponent, FormComponent, ChartsComponent],
+  declarations: [AppComponent, FormComponent, ChartsComponent, QuestionsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

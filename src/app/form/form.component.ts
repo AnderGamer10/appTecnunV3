@@ -1,13 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { HttpService } from '../services/http.service';
-
+import * as $ from 'jquery';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit {
+  constructor(public _router: Router) {}
   Ciudades = ['Donostia', 'Valencia', 'Sevilla'];
   Professions = [
     'Local Goverment',
@@ -21,12 +22,7 @@ export class FormComponent implements OnInit {
     'National goverment',
     'Other',
   ];
-  // chartCreation() {
-  //   this.createChartsToChild.emit();
-  // }
-  // ocultarForm(): void {
-  //   this.ocultar.emit();
-  // }
+  // mostrarFormulario: boolean = true;
 
   cantPaginas = 12;
   paginaActual = 0;
@@ -78,69 +74,19 @@ export class FormComponent implements OnInit {
 
   ciudad: any;
   role: any;
-
   changeCiudad(value: any): void {
     this.ciudad = value;
   }
-
   changeRole(value: any): void {
     this.role = value;
   }
 
-  mostrar: boolean = true;
-  subdimensiones = ['L1', 'L2', 'L3', 'L4'];
-  preguntas: any = {};
-  elementos: any = {};
-  tablaPreguntas: any = {};
-  public L1: any = [];
-  public L2: any = [];
-  public L3: any = [];
-  public L4: any = [];
-  constructor(private questionsService: HttpService) {}
-  filtrarElementos(id: string) {
-    return this.elementos
-      .filter((resp: { idPregunta: string }) => resp.idPregunta === id)
-      .sort((a: { valor: number }, b: { valor: number }) =>
-        a.valor > b.valor ? 1 : -1
-      );
-  }
+  // chartCreation() {
+  //   this.createChartsToChild.emit();
+  // }
+  // ocultarForm(): void {
+  //   this.ocultar.emit();
+  // }
 
-  filtrarTablaPreguntas(id: string) {
-    return this.tablaPreguntas
-      .filter((resp: { idPregunta: string }) => resp.idPregunta === id)
-      .sort((a: { valor: number }, b: { valor: number }) =>
-        a.valor > b.valor ? 1 : -1
-      );
-  }
-
-  ngOnInit(): void {
-    this.questionsService.getPreguntas().subscribe((resp) => {
-      this.preguntas = resp;
-      console.log(this.preguntas);
-      console.log(this.preguntas[0]);
-      this.L1 = this.preguntas.filter((resp: any) => {
-        return resp.subdimension === 'L1';
-      });
-      this.L2 = this.preguntas.filter((resp: any) => {
-        return resp.subdimension === 'L2';
-      });
-      this.L3 = this.preguntas.filter((resp: any) => {
-        return resp.subdimension === 'L3';
-      });
-      this.L4 = this.preguntas.filter((resp: any) => {
-        return resp.subdimension === 'L4';
-      });
-      console.log('---------------');
-      console.log(this.L4);
-    });
-
-    this.questionsService.getElementos().subscribe((resp) => {
-      this.elementos = resp;
-      console.log(this.elementos);
-    });
-    this.questionsService.getPreguntasTabla().subscribe((resp) => {
-      this.tablaPreguntas = resp;
-      console.log(this.tablaPreguntas);
-    });
-  }
+  ngOnInit(): void {}
 }
