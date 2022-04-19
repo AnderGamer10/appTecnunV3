@@ -44,8 +44,10 @@
                         <tr *ngFor="let itemElemento of filtrarElementos(mainItem.preguntaId)">
                             <td>{{itemElemento.elemento}}</td>
                             <td *ngFor="let item of filtrarTablaPreguntas(mainItem.preguntaId); let i = index">
-                                <input type="radio" name="{{mainItem.preguntaId}}a{{itemElemento.valor}}"
+                                <input *ngIf="itemElemento.tipoPregunta === 'radio'" type="radio" name="{{mainItem.preguntaId}}a{{itemElemento.valor}}"
                                     value="{{i+1}}">
+                                <input *ngIf="itemElemento.tipoPregunta === 'checkbox'" type="checkbox" name="{{mainItem.preguntaId}}a{{itemElemento.valor}}"
+                                value="{{i+1}}">
                             </td>
                         </tr>
                     </tbody>
@@ -79,6 +81,14 @@
                     </mat-radio-group>
                 </div> -->
         </div>
+    </div>
+    <div [ngStyle]="{'display': paginaActual === 6 ? 'block' : 'none'}">
+        <p>P1</p>
+        <div *ngFor="let mainItem of filtrarSubdimension('P1')"> </div>
+    </div>
+    <div [ngStyle]="{'display': paginaActual === 7 ? 'block' : 'none'}">
+        <p>P2</p>
+        <div *ngFor="let mainItem of filtrarSubdimension('P2')"> </div>
     </div>
 </div>
 
