@@ -35,6 +35,7 @@ export class ChartsComponent implements OnInit {
   public radarL4Chart: Partial<RadarChart> | any;
   public pruebaRadar: Partial<RadarChart> | any;
   constructor() {}
+  email: string = 'antonio@gmail.com';
 
   ngOnInit(): void {
     this.radarL4Chart = {

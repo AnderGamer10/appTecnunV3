@@ -20,7 +20,47 @@
 
     <div [ngStyle]="{'display': paginaActual === 3 ? 'block' : 'none'}">
         <p>L2</p>
-        <div *ngFor="let mainItem of filtrarSubdimension('L2')"> </div>
+        <div *ngFor="let mainItem of filtrarSubdimension('L2')"> 
+            <h3><b>{{mainItem.pregunta}}</b></h3>
+            <div *ngIf="mainItem.tipoPregunta === 'table'">
+                <table class="table table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th *ngFor="let item of filtrarTablaPreguntas(mainItem.preguntaId)">
+                                {{item.elementoPregunta}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let itemElemento of filtrarElementos(mainItem.preguntaId)">
+                            <td>{{itemElemento.elemento}}</td>
+                            <td *ngFor="let item of filtrarTablaPreguntas(mainItem.preguntaId); let i = index">
+                                <input *ngIf="itemElemento.tipoPregunta === 'radio'" type="radio" name="{{mainItem.preguntaId}}a{{itemElemento.valor}}"
+                                    value="{{i+1}}">
+                                <input *ngIf="itemElemento.tipoPregunta === 'checkbox'" type="checkbox" name="{{mainItem.preguntaId}}a{{itemElemento.valor}}"
+                                value="{{i+1}}">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="mainItem.tipoPregunta === 'radio'">
+                <mat-radio-group aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
+                    <mat-radio-button name="{{mainItem.preguntaId}}" class="radioButton"
+                        *ngFor="let item of filtrarElementos(mainItem.preguntaId)" [value]="item.valor">
+                        {{item.elemento}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div *ngIf="mainItem.tipoPregunta === 'checkbox'">
+                <section class="{{mainItem.preguntaId}}">
+                    <p *ngFor="let item of filtrarElementos(mainItem.preguntaId)">
+                        <mat-checkbox value="{{item.elemento}}" (change)="mostrarDatos()"
+                            name="{{mainItem.preguntaId}}">{{item.elemento}}</mat-checkbox>
+                    </p>
+                </section>
+            </div>
+        </div>
     </div>
 
     <div [ngStyle]="{'display': paginaActual === 4 ? 'block' : 'none'}">
@@ -36,6 +76,7 @@
                 <table class="table table-sm table-hover">
                     <thead>
                         <tr>
+                            <th>Element</th>
                             <th *ngFor="let item of filtrarTablaPreguntas(mainItem.preguntaId)">
                                 {{item.elementoPregunta}}</th>
                         </tr>
