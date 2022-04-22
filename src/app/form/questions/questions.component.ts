@@ -7,22 +7,7 @@ import * as $ from 'jquery';
   styleUrls: ['./questions.component.css'],
 })
 export class QuestionsComponent implements OnInit {
-  constructor(private questionsService: HttpService) {
-    this.questionsService.getPreguntas().subscribe((resp) => {
-      this.preguntas = resp;
-      console.log(this.preguntas);
-    });
-
-    this.questionsService.getElementos().subscribe((resp) => {
-      this.elementos = resp;
-      console.log(this.elementos);
-    });
-
-    this.questionsService.getPreguntasTabla().subscribe((resp) => {
-      this.tablaPreguntas = resp;
-      console.log(this.tablaPreguntas);
-    });
-  }
+  constructor(private questionsService: HttpService) {}
   @Input() paginaActual: number | undefined;
   subdimensiones = ['L1', 'L2', 'L3', 'L4'];
   preguntas: any = {};
@@ -64,19 +49,45 @@ export class QuestionsComponent implements OnInit {
     //   console.log(d);
     // });
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.questionsService.getPreguntas().subscribe((resp) => {
+      this.preguntas = resp;
+      console.log(this.preguntas);
+    });
+
+    this.questionsService.getElementos().subscribe((resp) => {
+      this.elementos = resp;
+      console.log(this.elementos);
+    });
+
+    this.questionsService.getPreguntasTabla().subscribe((resp) => {
+      this.tablaPreguntas = resp;
+      console.log(this.tablaPreguntas);
+    });
+  }
 
   postData() {
-    // console.log($(`input:radio[name="l4q1a1"]:checked`).val());
-    console.log($('input[name="l4q2"]:checked').val());
+    // ------------------------------------- Falta por obtener los datos de las matrices(los tipo tabla) y las preguntas mix -----------------------------------
     this.preguntas.map((d: any) => {
       switch (d.tipoPregunta) {
         case 'radio':
-          console.log($(`input:radio[name="l4q2"]:checked`).val());
+          console.log(
+            `${d.tipoPregunta} ${d.preguntaId} = ` +
+              $(`input:radio[name="${d.preguntaId}"]:checked`).val()
+          );
           break;
         case 'checkbox':
-          console.log($(`input[name="${d.preguntaId}"]:checked`).length);
+          console.log(
+            `${d.tipoPregunta} ${d.preguntaId} = ` +
+              $(`input[name="${d.preguntaId}"]:checked`).length
+          );
           break;
+        case 'table':
+          // Hacer un for para obtener los datos de la tabla a1-a2... -----------------
+          console.log(
+            `${d.tipoPregunta} ${d.preguntaId} = ` +
+              $(`input[name="l2q7a1"]:checked`).length
+          );
       }
     });
   }

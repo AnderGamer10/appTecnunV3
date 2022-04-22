@@ -45,9 +45,9 @@
                 </table>
             </div>
             <div *ngIf="mainItem.tipoPregunta === 'radio'">
-                <mat-radio-group aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
-                    <mat-radio-button name="{{mainItem.preguntaId}}" class="radioButton"
-                        *ngFor="let item of filtrarElementos(mainItem.preguntaId)" [value]="item.valor">
+                <mat-radio-group [name]="mainItem.preguntaId" aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
+                    <mat-radio-button class="radioButton"
+                        *ngFor="let item of filtrarElementos(mainItem.preguntaId)" [value]="item.valor" >
                         {{item.elemento}}
                     </mat-radio-button>
                 </mat-radio-group>
@@ -95,7 +95,7 @@
                 </table>
             </div>
             <div *ngIf="mainItem.tipoPregunta === 'radio'">
-                <mat-radio-group aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
+                <mat-radio-group [name]="mainItem.preguntaId" aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
                     <mat-radio-button name="{{mainItem.preguntaId}}" class="radioButton"
                         *ngFor="let item of filtrarElementos(mainItem.preguntaId)" [value]="item.valor">
                         {{item.elemento}}

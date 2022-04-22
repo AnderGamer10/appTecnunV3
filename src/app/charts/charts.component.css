@@ -11,21 +11,22 @@ header{
     background-color: #fff;
 }
 .navbar-header{
-    width: 250px;
+    width: 200px;
+    height: 75px;
 }
 .navbar-header img{
-    height: 100px;
-    width: 120px;
+    height: 65px;
+    width: 100px;
 }
 #vertical-menu{
-    width: 250px;
+    width: 200px;
     height: 100vh;
     position: fixed;
-    margin-top: 100px;
+    margin-top: 75px;
     z-index: 1001;
 }
 #main-content{
-    margin-left: 250px;
+    margin-left: 200px;
     overflow: hidden;
     display: block;
 }
@@ -35,11 +36,14 @@ header{
     background-color: rgba(0,0,0,.03);
 }
 #welcome{
-    width: 450px;
+    width: 350px;
     margin-left: 20px;
     padding: 10px;
     border-radius: 0.25rem;
     box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+}
+h4{
+    font-size: 18px;
 }
 .DimensionTitle{
     width: 160px;
@@ -55,8 +59,7 @@ header{
     margin-bottom: 5px;
     margin-left: 130px;
 }
-#sub-charts{
-}
+
 .chart-view{
     margin: 50px;
     margin-top: 25px;
@@ -71,6 +74,22 @@ header{
 footer{
     height: 75px;
 }
+.flecha{
+    font-size: 30px;
+    margin-right: 5px;
+    width: 50px;
+    height: 50px;
+    padding: 8px 13px;
+    border-radius: 30px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+.page-title-right{
+    margin-right: 50px;
+}
+.page-title-box h4{
+    margin-right: auto;
+}
 @media(max-width:920px){
     #vertical-menu{
         width: 0px;
@@ -79,7 +98,7 @@ footer{
         margin-left: 0px;
     }
     .navbar-header img{
-        height: 80px;
-        width: 100px;
+        height: 60px;
+        width: 80px;
     }
 }
