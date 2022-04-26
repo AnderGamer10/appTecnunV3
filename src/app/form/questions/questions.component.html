@@ -111,16 +111,19 @@
                 </section>
             </div>
             <!-- <div *ngIf="mainItem.tipoPregunta === 'mix'">
-                    <mat-radio-group aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
-                        <mat-radio-button name="{{item}}" class="radioButton"
-                            *ngFor="let item of filtrarElementos(mainItem.preguntaId)" [value]="item.valor">
-                            {{item.elemento}}
-                        </mat-radio-button>
-                        <section class="{{mainItem.preguntaId}}">
-                            <p *ngFor="let item of filtrarElementos(mainItem.preguntaId)"><mat-checkbox formControlName="{{item.elemento}}">{{item.elemento}}</mat-checkbox></p>
-                        </section>
-                    </mat-radio-group>
-                </div> -->
+
+            </div> -->
+            <!-- <div *ngIf="mainItem.tipoPregunta === 'mix'">
+                <mat-radio-group aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
+                    <mat-radio-button name="{{item}}" class="radioButton"
+                        *ngFor="let item of filtrarElementos(mainItem.preguntaId)" [value]="item.valor">
+                        {{item.elemento}}
+                    </mat-radio-button>
+                    <section class="{{mainItem.preguntaId}}">
+                        <p *ngFor="let item of filtrarElementos(mainItem.preguntaId)"> <mat-checkbox value="{{item.elemento}}" (change)="mostrarDatos()" name="{{mainItem.preguntaId}}">{{item.elemento}}</mat-checkbox></p>
+                    </section>
+                </mat-radio-group>
+            </div> -->
         </div>
     </div>
     <div [ngStyle]="{'display': paginaActual === 6 ? 'block' : 'none'}">

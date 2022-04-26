@@ -13,6 +13,7 @@ export class QuestionsComponent implements OnInit {
   preguntas: any = {};
   elementos: any = {};
   tablaPreguntas: any = {};
+  respuesta: any;
 
   filtrarElementos(id: string) {
     return this.elementos
@@ -65,9 +66,13 @@ export class QuestionsComponent implements OnInit {
       console.log(this.tablaPreguntas);
     });
   }
-
+  // Info
+  // console.log(
+  //   `${d.tipoPregunta} ${d.preguntaId}a${i} = ` +
+  //     $(`input[name="${d.preguntaId}a${i}"]:checked`).length
+  // );
+  // console.log(this.filtrarElementos(d.preguntaId)[0].tipoPregunta);
   postData() {
-    // ------------------------------------- Falta por obtener los datos de las matrices(los tipo tabla) y las preguntas mix -----------------------------------
     this.preguntas.map((d: any) => {
       switch (d.tipoPregunta) {
         case 'radio':
@@ -75,19 +80,56 @@ export class QuestionsComponent implements OnInit {
             `${d.tipoPregunta} ${d.preguntaId} = ` +
               $(`input:radio[name="${d.preguntaId}"]:checked`).val()
           );
+          this.respuesta = $(
+            `input:radio[name="${d.preguntaId}"]:checked`
+          ).val();
           break;
         case 'checkbox':
           console.log(
             `${d.tipoPregunta} ${d.preguntaId} = ` +
               $(`input[name="${d.preguntaId}"]:checked`).length
           );
+          this.respuesta = $(`input[name="${d.preguntaId}"]:checked`).length;
           break;
         case 'table':
-          // Hacer un for para obtener los datos de la tabla a1-a2... -----------------
-          console.log(
-            `${d.tipoPregunta} ${d.preguntaId} = ` +
-              $(`input[name="l2q7a1"]:checked`).length
-          );
+          this.respuesta = 0;
+          let cantPreguntas = 0;
+          switch (this.filtrarElementos(d.preguntaId)[0].tipoPregunta) {
+            case 'checkbox':
+              for (
+                let i = 1;
+                i < this.filtrarElementos(d.preguntaId).length + 1;
+                i++
+              ) {
+                this.respuesta += $(
+                  `input[name="${d.preguntaId}a${i}"]:checked`
+                ).length;
+                cantPreguntas++;
+              }
+              console.log(
+                'prueba de valor ----- ' +
+                  Math.floor(this.respuesta / cantPreguntas)
+              );
+              break;
+            case 'radio':
+              for (
+                let i = 1;
+                i < this.filtrarElementos(d.preguntaId).length + 1;
+                i++
+              ) {
+                let valorRespuesta: any = $(
+                  `input[name="${d.preguntaId}a${i}"]:checked`
+                ).val();
+                this.respuesta += valorRespuesta - 0;
+                cantPreguntas++;
+              }
+              console.log(
+                'la respuesta es del radio ' +
+                  Math.floor(this.respuesta / cantPreguntas)
+              );
+              break;
+          }
+          break;
       }
     });
   }
