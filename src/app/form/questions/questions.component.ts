@@ -9,11 +9,15 @@ import * as $ from 'jquery';
 export class QuestionsComponent implements OnInit {
   constructor(private questionsService: HttpService) {}
   @Input() paginaActual: number | undefined;
-  subdimensiones = ['L1', 'L2', 'L3', 'L4'];
+  @Input() cantPaginas: number | undefined;
+  @Input() subdimensiones: any | undefined;
+
   preguntas: any = {};
   elementos: any = {};
   tablaPreguntas: any = {};
   respuesta: any;
+
+  datosObtenidos: boolean = false;
 
   filtrarElementos(id: string) {
     return this.elementos
@@ -53,17 +57,18 @@ export class QuestionsComponent implements OnInit {
   ngOnInit(): void {
     this.questionsService.getPreguntas().subscribe((resp) => {
       this.preguntas = resp;
-      console.log(this.preguntas);
+      // console.log(this.preguntas);
     });
 
     this.questionsService.getElementos().subscribe((resp) => {
       this.elementos = resp;
-      console.log(this.elementos);
+      // console.log(this.elementos);
     });
 
     this.questionsService.getPreguntasTabla().subscribe((resp) => {
       this.tablaPreguntas = resp;
-      console.log(this.tablaPreguntas);
+      this.datosObtenidos = true;
+      // console.log(this.tablaPreguntas);
     });
   }
   // Info
@@ -107,7 +112,7 @@ export class QuestionsComponent implements OnInit {
                 cantPreguntas++;
               }
               console.log(
-                'prueba de valor ----- ' +
+                'Table checkbox ----- ' +
                   Math.floor(this.respuesta / cantPreguntas)
               );
               break;
@@ -124,8 +129,7 @@ export class QuestionsComponent implements OnInit {
                 cantPreguntas++;
               }
               console.log(
-                'la respuesta es del radio ' +
-                  Math.floor(this.respuesta / cantPreguntas)
+                'Table radio ' + Math.floor(this.respuesta / cantPreguntas)
               );
               break;
           }

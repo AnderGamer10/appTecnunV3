@@ -22,10 +22,22 @@ export class FormComponent implements OnInit {
     'National goverment',
     'Other',
   ];
-  // mostrarFormulario: boolean = true;
-
-  cantPaginas = 12;
+  subdimensiones = [
+    'L1',
+    'L2',
+    'L3',
+    'L4',
+    'P1',
+    'P2',
+    'I1',
+    'I2',
+    'C1',
+    'C2',
+    'U1',
+  ];
+  cantPaginas = this.subdimensiones.length + 2;
   paginaActual = 0;
+
   avPag(): void {
     if (this.paginaActual < this.cantPaginas) {
       this.paginaActual++;
