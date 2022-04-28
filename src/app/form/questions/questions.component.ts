@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
 import * as $ from 'jquery';
+import { dataInfo } from '../../models/req-response';
 @Component({
   selector: 'app-questions',
   templateUrl: './questions.component.html',
@@ -12,12 +13,16 @@ export class QuestionsComponent implements OnInit {
   @Input() cantPaginas: number | undefined;
   @Input() subdimensiones: any | undefined;
 
+  @Input() ciudad: any | undefined;
+  @Input() Email: any | undefined;
+
   preguntas: any = {};
   elementos: any = {};
   tablaPreguntas: any = {};
   respuesta: any;
 
   datosObtenidos: boolean = false;
+  dataSend: boolean = false;
 
   filtrarElementos(id: string) {
     return this.elementos
@@ -57,37 +62,36 @@ export class QuestionsComponent implements OnInit {
   ngOnInit(): void {
     this.questionsService.getPreguntas().subscribe((resp) => {
       this.preguntas = resp;
-      // console.log(this.preguntas);
     });
 
     this.questionsService.getElementos().subscribe((resp) => {
       this.elementos = resp;
-      // console.log(this.elementos);
     });
 
     this.questionsService.getPreguntasTabla().subscribe((resp) => {
       this.tablaPreguntas = resp;
       this.datosObtenidos = true;
-      // console.log(this.tablaPreguntas);
     });
   }
-  // Info
-  // console.log(
-  //   `${d.tipoPregunta} ${d.preguntaId}a${i} = ` +
-  //     $(`input[name="${d.preguntaId}a${i}"]:checked`).length
-  // );
-  // console.log(this.filtrarElementos(d.preguntaId)[0].tipoPregunta);
   postData() {
+    let data: dataInfo;
+    this.dataSend = true;
     this.preguntas.map((d: any) => {
       switch (d.tipoPregunta) {
         case 'radio':
-          console.log(
-            `${d.tipoPregunta} ${d.preguntaId} = ` +
-              $(`input:radio[name="${d.preguntaId}"]:checked`).val()
-          );
           this.respuesta = $(
             `input:radio[name="${d.preguntaId}"]:checked`
           ).val();
+          data = {
+            ciudad: this.ciudad,
+            año: 2022,
+            email: this.Email.value,
+            idPregunta: d.preguntaId,
+            respuesta: this.respuesta,
+          };
+          this.questionsService.postRespuestas(data).subscribe((data) => {
+            console.log(data);
+          });
           break;
         case 'checkbox':
           console.log(
@@ -95,6 +99,16 @@ export class QuestionsComponent implements OnInit {
               $(`input[name="${d.preguntaId}"]:checked`).length
           );
           this.respuesta = $(`input[name="${d.preguntaId}"]:checked`).length;
+          data = {
+            ciudad: this.ciudad,
+            año: 2022,
+            email: this.Email.value,
+            idPregunta: d.preguntaId,
+            respuesta: this.respuesta,
+          };
+          this.questionsService.postRespuestas(data).subscribe((data) => {
+            console.log(data);
+          });
           break;
         case 'table':
           this.respuesta = 0;
@@ -111,10 +125,16 @@ export class QuestionsComponent implements OnInit {
                 ).length;
                 cantPreguntas++;
               }
-              console.log(
-                'Table checkbox ----- ' +
-                  Math.floor(this.respuesta / cantPreguntas)
-              );
+              data = {
+                ciudad: this.ciudad,
+                año: 2022,
+                email: this.Email.value,
+                idPregunta: d.preguntaId,
+                respuesta: this.respuesta / cantPreguntas,
+              };
+              this.questionsService.postRespuestas(data).subscribe((data) => {
+                console.log(data);
+              });
               break;
             case 'radio':
               for (
@@ -128,9 +148,16 @@ export class QuestionsComponent implements OnInit {
                 this.respuesta += valorRespuesta - 0;
                 cantPreguntas++;
               }
-              console.log(
-                'Table radio ' + Math.floor(this.respuesta / cantPreguntas)
-              );
+              data = {
+                ciudad: this.ciudad,
+                año: 2022,
+                email: this.Email.value,
+                idPregunta: d.preguntaId,
+                respuesta: this.respuesta / cantPreguntas,
+              };
+              this.questionsService.postRespuestas(data).subscribe((data) => {
+                console.log(data);
+              });
               break;
           }
           break;

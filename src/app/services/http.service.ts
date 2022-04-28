@@ -5,6 +5,7 @@ import {
   Elementos,
   ElementosPreguntas,
   Preguntas,
+  dataInfo,
 } from '../models/req-response';
 @Injectable({
   providedIn: 'root',
@@ -20,8 +21,9 @@ export class HttpService {
   public postClientData(cliente: any): Observable<any> {
     return this.http.post(this.API_CLIENTES, cliente);
   }
-  public postAnswer(respuesta: any): Observable<any> {
-    return this.http.post(this.API_RESPUESTAS, respuesta);
+
+  public postRespuestas(respuesta: dataInfo): Observable<dataInfo> {
+    return this.http.post<dataInfo>(this.API_RESPUESTAS, respuesta);
   }
 
   public getRespuestas() {

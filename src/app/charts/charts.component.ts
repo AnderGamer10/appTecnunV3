@@ -15,6 +15,7 @@ export type RadarChart = {
   styleUrls: ['./charts.component.css'],
 })
 export class ChartsComponent implements OnInit {
+  DimensionL = ['L1', 'L2', 'L3', 'L4'];
   public radarL1Chart: Partial<RadarChart> | any;
   public radarL2Chart: Partial<RadarChart> | any;
   public radarL3Chart: Partial<RadarChart> | any;
@@ -133,7 +134,7 @@ export class ChartsComponent implements OnInit {
         forceNiceScale: true,
       },
     };
-
+    // new ApexCharts(document.getElementById('#L1'), this.radarL1Chart).render();
     this.radarL2Chart = {
       series: [
         {
