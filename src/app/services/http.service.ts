@@ -6,6 +6,7 @@ import {
   ElementosPreguntas,
   Preguntas,
   dataInfo,
+  Clientes,
 } from '../models/req-response';
 @Injectable({
   providedIn: 'root',
@@ -18,8 +19,8 @@ export class HttpService {
   private API_PREGUNTASTABLA = 'https://localhost:5001/api/PreguntasTablas';
   constructor(private http: HttpClient) {}
 
-  public postClientData(cliente: any): Observable<any> {
-    return this.http.post(this.API_CLIENTES, cliente);
+  public postClientData(cliente: Clientes): Observable<Clientes> {
+    return this.http.post<Clientes>(this.API_CLIENTES, cliente);
   }
 
   public postRespuestas(respuesta: dataInfo): Observable<dataInfo> {

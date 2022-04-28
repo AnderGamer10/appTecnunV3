@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
 import * as $ from 'jquery';
-import { dataInfo } from '../../models/req-response';
+import { dataInfo, Clientes } from '../../models/req-response';
 @Component({
   selector: 'app-questions',
   templateUrl: './questions.component.html',
@@ -15,6 +15,8 @@ export class QuestionsComponent implements OnInit {
 
   @Input() ciudad: any | undefined;
   @Input() Email: any | undefined;
+  @Input() yearsExperience: any | undefined;
+  @Input() role: any | undefined;
 
   preguntas: any = {};
   elementos: any = {};
@@ -74,6 +76,15 @@ export class QuestionsComponent implements OnInit {
     });
   }
   postData() {
+    let cliente: Clientes = {
+      email: this.Email.value,
+      profesionalRole: this.role,
+      yearsOfExperience: this.yearsExperience.value,
+      mainChallenges: 's',
+    };
+    this.questionsService.postClientData(cliente).subscribe((data) => {
+      console.log(data);
+    });
     let data: dataInfo;
     this.dataSend = true;
     this.preguntas.map((d: any) => {
