@@ -1,4 +1,4 @@
-header{
+/* header{
     display: block;
 }
 #page-topbar{
@@ -101,4 +101,84 @@ footer{
         height: 60px;
         width: 80px;
     }
+} */
+
+
+#sidebar-container{
+    min-height: 100vh;
+    background-color: #111854;
+}
+#sidebar-container a{
+    text-decoration: none; 
+    color: white;
+}
+#sidebar-container a:hover{
+    color: rgb(56, 56, 251);
+}
+
+#sidebar-container .menu{
+    width: 18rem;
+}
+
+#content{
+    background-color: white;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+#city{
+    width: auto;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+}
+#city h4{
+    font-size: 15px;
+}
+.DimensionTitle{
+    width: 160px;
+    margin-left: 50px;
+    padding: 10px;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+}
+
+.chart-view{
+    margin: 50px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+}
+footer{
+    height: 75px;
+}
+.logo{
+    text-align: center;
+}
+.logo img{
+    margin-top: 5px;
+    height: 65px;
+    width: 100px;
+}
+.flecha{
+    font-size: 30px;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 50px;
+    height: 50px;
+    padding: 8px 13px;
+    border-radius: 30px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+.page-title-box{
+    background-color: rgba(0,0,0,.03);
+}
+#fondo{
+    background-color: rgba(0,0,0,.03);
 }

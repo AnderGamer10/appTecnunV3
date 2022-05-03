@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as ApexCharts from 'apexcharts';
+import { HttpService } from '../services/http.service';
 export type RadarChart = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -15,14 +16,17 @@ export type RadarChart = {
   styleUrls: ['./charts.component.css'],
 })
 export class ChartsComponent implements OnInit {
-  DimensionL = ['L1', 'L2', 'L3', 'L4'];
+  Subdimensiones = ['L1', 'L2', 'L3', 'L4', 'E1', 'U1'];
+
+  ValoresSubdimensiones: any = [];
   public radarL1Chart: Partial<RadarChart> | any;
   public radarL2Chart: Partial<RadarChart> | any;
   public radarL3Chart: Partial<RadarChart> | any;
   public radarL4Chart: Partial<RadarChart> | any;
-  public pruebaRadar: Partial<RadarChart> | any;
-  constructor() {}
-  email: string = 'ander@gmail.com';
+
+  constructor(private questionsService: HttpService) {}
+  // ciudad: string = 'DONOSTIA';
+  ciudad: any = sessionStorage.getItem('ciudad');
   vistaMain: Boolean = true;
   DashboardView: string = 'Main';
 
@@ -90,7 +94,16 @@ export class ChartsComponent implements OnInit {
     this.vistaMain = false;
     this.DashboardView = subdimension;
   }
-
+  datosa: any = {};
+  crearVariables() {
+    this.Subdimensiones.forEach((x) => {
+      this.ValoresSubdimensiones.push(x + 'Cont');
+      this.ValoresSubdimensiones.push(x + 'Values');
+      this.ValoresSubdimensiones.push(x + 'ValuesOtherYear');
+      this.ValoresSubdimensiones.push(x + 'ThisYear');
+      this.ValoresSubdimensiones.push(x + 'OtherYear');
+    });
+  }
   async createCharts() {
     this.radarL1Chart = {
       series: [
@@ -266,6 +279,7 @@ export class ChartsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.crearVariables();
     this.createCharts();
   }
 }

@@ -92,13 +92,5 @@ export class FormComponent implements OnInit {
   changeRole(value: any): void {
     this.role = value;
   }
-
-  // chartCreation() {
-  //   this.createChartsToChild.emit();
-  // }
-  // ocultarForm(): void {
-  //   this.ocultar.emit();
-  // }
-
   ngOnInit(): void {}
 }

@@ -61,7 +61,13 @@ export class QuestionsComponent implements OnInit {
     //   console.log(d);
     // });
   }
+
   ngOnInit(): void {
+    // this.questionsService.getSubdimensiones().subscribe((resp) => {
+    //   for (let i = 0; i < resp; i++) {
+    //     console.log(resp);
+    //   }
+    // });
     this.questionsService.getPreguntas().subscribe((resp) => {
       this.preguntas = resp;
     });
@@ -76,6 +82,8 @@ export class QuestionsComponent implements OnInit {
     });
   }
   postData() {
+    sessionStorage.setItem('ciudad', this.ciudad);
+    const date = new Date();
     let cliente: Clientes = {
       email: this.Email.value,
       profesionalRole: this.role,
@@ -95,7 +103,7 @@ export class QuestionsComponent implements OnInit {
           ).val();
           data = {
             ciudad: this.ciudad,
-            año: 2022,
+            año: date.getFullYear(),
             email: this.Email.value,
             idPregunta: d.preguntaId,
             respuesta: this.respuesta,
@@ -105,14 +113,10 @@ export class QuestionsComponent implements OnInit {
           });
           break;
         case 'checkbox':
-          console.log(
-            `${d.tipoPregunta} ${d.preguntaId} = ` +
-              $(`input[name="${d.preguntaId}"]:checked`).length
-          );
           this.respuesta = $(`input[name="${d.preguntaId}"]:checked`).length;
           data = {
             ciudad: this.ciudad,
-            año: 2022,
+            año: date.getFullYear(),
             email: this.Email.value,
             idPregunta: d.preguntaId,
             respuesta: this.respuesta,
@@ -138,7 +142,7 @@ export class QuestionsComponent implements OnInit {
               }
               data = {
                 ciudad: this.ciudad,
-                año: 2022,
+                año: date.getFullYear(),
                 email: this.Email.value,
                 idPregunta: d.preguntaId,
                 respuesta: this.respuesta / cantPreguntas,
@@ -156,12 +160,16 @@ export class QuestionsComponent implements OnInit {
                 let valorRespuesta: any = $(
                   `input[name="${d.preguntaId}a${i}"]:checked`
                 ).val();
-                this.respuesta += valorRespuesta - 0;
+                console.log(valorRespuesta);
+                if (valorRespuesta === undefined) {
+                } else {
+                  this.respuesta += valorRespuesta - 0;
+                }
                 cantPreguntas++;
               }
               data = {
                 ciudad: this.ciudad,
-                año: 2022,
+                año: date.getFullYear(),
                 email: this.Email.value,
                 idPregunta: d.preguntaId,
                 respuesta: this.respuesta / cantPreguntas,
