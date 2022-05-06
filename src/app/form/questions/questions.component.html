@@ -50,7 +50,7 @@
             <div *ngIf="mainItem.tipoPregunta === 'checkbox'">
                 <section class="{{mainItem.preguntaId}}">
                     <p *ngFor="let item of filtrarElementos(mainItem.preguntaId)">
-                        <mat-checkbox value="{{item.elemento}}" (change)="mostrarDatos()"
+                        <mat-checkbox value="{{item.elemento}}" 
                             name="{{mainItem.preguntaId}}">{{item.elemento}}</mat-checkbox>
                     </p>
                 </section>

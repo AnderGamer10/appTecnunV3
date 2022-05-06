@@ -16,103 +16,144 @@ export type RadarChart = {
   styleUrls: ['./charts.component.css'],
 })
 export class ChartsComponent implements OnInit {
-  Subdimensiones = ['L1', 'L2', 'L3', 'L4', 'E1', 'U1'];
-
-  ValoresSubdimensiones: any = [];
   public radarL1Chart: Partial<RadarChart> | any;
   public radarL2Chart: Partial<RadarChart> | any;
   public radarL3Chart: Partial<RadarChart> | any;
   public radarL4Chart: Partial<RadarChart> | any;
 
   constructor(private questionsService: HttpService) {}
-  // ciudad: string = 'DONOSTIA';
   ciudad: any = sessionStorage.getItem('ciudad');
   vistaMain: Boolean = true;
   DashboardView: string = 'Main';
+  Respuestas: any = {};
+  agnoSeleccionado: number = 2021;
+  UltimoAgno: Date = new Date();
+  prueba: any = {};
+  async ObtenerData(ciudad: string) {
+    await this.questionsService.getRespuestas().subscribe((resp) => {
+      this.Respuestas = resp;
 
-  L1Cant = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];
-  L1Values = [3, 3, 5, 2, 4, 3, 4, 5];
-  L1ValuesOtherYear = [2, 1, 4, 1, 2, 1, 3, 4];
-  L1ThisYear = '2022';
-  L1OtherYear = '2020';
+      console.log(this.Respuestas);
+      this.Respuestas = this.Respuestas.filter(
+        (resp: { ciudad: string }) => resp.ciudad === ciudad
+      );
+      this.prueba = this.Respuestas.filter(
+        (resp: { idPregunta: string; año: number }) =>
+          resp.idPregunta === 'l1q1' && resp.año === 2022
+      )[0].respuesta;
+      console.log(this.Respuestas);
+      // Prueba datos
+      console.log(
+        this.Respuestas.filter(
+          (resp: { idPregunta: string; año: number }) =>
+            resp.idPregunta === 'l1q1' && resp.año === 2022
+        )[0].respuesta
+      );
+    });
+  }
+  // Error ---------------------------------- Carga antes que los datos
+  async obtenerDataSubdimension(IdPregunta: string, agno: number) {
+    console.log(this.Respuestas);
+    console.log(
+      this.Respuestas.filter(
+        (resp: { idPregunta: string; año: number }) =>
+          resp.idPregunta === IdPregunta && resp.año === agno
+      )[0].respuesta
+    );
+    return this.Respuestas.filter(
+      (resp: { idPregunta: string; año: number }) =>
+        resp.idPregunta === IdPregunta && resp.año === agno
+    )[0].respuesta;
+  }
+  L1Cant = ['Q1', 'Q2', 'Q3'];
+  L1Values = [
+    this.obtenerDataSubdimension('l1q1', 2022),
+    this.obtenerDataSubdimension('l1q2', 2022),
+    this.obtenerDataSubdimension('l1q3', 2022),
+  ];
+  L1ValuesOtherYear = [
+    this.obtenerDataSubdimension('l1q1', this.agnoSeleccionado),
+    this.obtenerDataSubdimension('l1q2', this.agnoSeleccionado),
+    this.obtenerDataSubdimension('l1q3', this.agnoSeleccionado),
+  ];
 
-  L2Cant = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];
-  L2Values = [2, 1, 4, 5, 2, 3, 2, 4];
-  L2ValuesOtherYear = [2, 1, 4, 1, 2, 1, 3, 4];
-  L2ThisYear = '2022';
-  L2OtherYear = '2020';
+  L2Cant = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6'];
+  L2Values = [
+    this.obtenerDataSubdimension('l2q1', 2022),
+    this.obtenerDataSubdimension('l2q2', 2022),
+    this.obtenerDataSubdimension('l2q3', 2022),
+    this.obtenerDataSubdimension('l2q1', 2022),
+    this.obtenerDataSubdimension('l2q2', 2022),
+    this.obtenerDataSubdimension('l2q3', 2022),
+  ];
+  L2ValuesOtherYear = [
+    this.obtenerDataSubdimension('l2q1', this.agnoSeleccionado),
+    this.obtenerDataSubdimension('l2q2', this.agnoSeleccionado),
+    this.obtenerDataSubdimension('l2q3', this.agnoSeleccionado),
+    this.obtenerDataSubdimension('l2q1', this.agnoSeleccionado),
+    this.obtenerDataSubdimension('l2q2', this.agnoSeleccionado),
+    this.obtenerDataSubdimension('l2q3', this.agnoSeleccionado),
+  ];
 
   L3Cant = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];
-  L3Values = [2, 1, 1, 2, 3, 2, 5, 5];
-  L3ValuesOtherYear = [2, 1, 4, 1, 2, 1, 3, 4];
-  L3ThisYear = '2022';
-  L3OtherYear = '2020';
+  L3Values = [
+    this.obtenerDataSubdimension('l3q1', 2022),
+    this.obtenerDataSubdimension('l3q2', 2022),
+    this.obtenerDataSubdimension('l3q3', 2022),
+    this.obtenerDataSubdimension('l3q1', 2022),
+    this.obtenerDataSubdimension('l3q2', 2022),
+    this.obtenerDataSubdimension('l3q3', 2022),
+  ];
+  L3ValuesOtherYear = [
+    this.obtenerDataSubdimension('l3q1', this.agnoSeleccionado),
+    this.obtenerDataSubdimension('l3q2', this.agnoSeleccionado),
+    this.obtenerDataSubdimension('l3q3', this.agnoSeleccionado),
+    this.obtenerDataSubdimension('l3q1', this.agnoSeleccionado),
+    this.obtenerDataSubdimension('l3q2', this.agnoSeleccionado),
+    this.obtenerDataSubdimension('l3q3', this.agnoSeleccionado),
+  ];
 
   L4Cant = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];
   L4Values = [3, 3, 5, 2, 1, 2, 3, 1];
   L4ValuesOtherYear = [2, 1, 4, 1, 2, 1, 3, 4];
-  L4ThisYear = '2022';
-  L4OtherYear = '2020';
 
   P1Cant = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];
   P1Values = [3, 3, 1, 1, 2, 4, 4, 4];
   P1ValuesOtherYear = [2, 1, 4, 1, 2, 1, 3, 4];
-  P1ThisYear = '2022';
-  P1OtherYear = '2020';
 
   P2Cant = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];
   P2Values = [3, 3, 1, 1, 2, 4, 4, 4];
   P2ValuesOtherYear = [2, 1, 4, 1, 2, 1, 3, 4];
-  P2ThisYear = '2022';
-  P2OtherYear = '2020';
 
   I1Cant = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];
   I1Values = [3, 3, 5, 1, 4, 3, 4, 5];
   I1ValuesOtherYear = [2, 1, 4, 1, 2, 1, 3, 4];
-  I1ThisYear = '2022';
-  I1OtherYear = '2020';
-
   I2Cant = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];
   I2Values = [3, 3, 5, 1, 4, 3, 4, 5];
   I2ValuesOtherYear = [2, 1, 4, 1, 2, 1, 3, 4];
-  I2ThisYear = '2022';
-  I2OtherYear = '2020';
 
   C1Cant = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];
   C1Values = [3, 3, 5, 1, 4, 3, 4, 5];
   C1ValuesOtherYear = [2, 1, 4, 1, 2, 1, 3, 4];
-  C1ThisYear = '2022';
-  C1OtherYear = '2020';
 
   C2Cant = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];
   C2Values = [3, 3, 5, 1, 4, 3, 4, 5];
   C2ValuesOtherYear = [2, 1, 4, 1, 2, 1, 3, 4];
-  C2ThisYear = '2022';
-  C2OtherYear = '2020';
 
   cambiarVista(subdimension: string): void {
     this.vistaMain = false;
     this.DashboardView = subdimension;
   }
-  datosa: any = {};
-  crearVariables() {
-    this.Subdimensiones.forEach((x) => {
-      this.ValoresSubdimensiones.push(x + 'Cont');
-      this.ValoresSubdimensiones.push(x + 'Values');
-      this.ValoresSubdimensiones.push(x + 'ValuesOtherYear');
-      this.ValoresSubdimensiones.push(x + 'ThisYear');
-      this.ValoresSubdimensiones.push(x + 'OtherYear');
-    });
-  }
+
   async createCharts() {
     this.radarL1Chart = {
       series: [
         {
-          name: this.L1ThisYear,
+          name: this.UltimoAgno.getFullYear(),
           data: this.L1Values,
         },
         {
-          name: this.L1OtherYear,
+          name: this.agnoSeleccionado,
           data: this.L1ValuesOtherYear,
         },
       ],
@@ -151,11 +192,11 @@ export class ChartsComponent implements OnInit {
     this.radarL2Chart = {
       series: [
         {
-          name: this.L2ThisYear,
+          name: this.UltimoAgno.getFullYear(),
           data: this.L2Values,
         },
         {
-          name: this.L2OtherYear,
+          name: this.agnoSeleccionado,
           data: this.L2ValuesOtherYear,
         },
       ],
@@ -194,11 +235,11 @@ export class ChartsComponent implements OnInit {
     this.radarL3Chart = {
       series: [
         {
-          name: this.L3ThisYear,
+          name: this.UltimoAgno.getFullYear(),
           data: this.L3Values,
         },
         {
-          name: this.L3OtherYear,
+          name: this.agnoSeleccionado,
           data: this.L3ValuesOtherYear,
         },
       ],
@@ -237,11 +278,11 @@ export class ChartsComponent implements OnInit {
     this.radarL4Chart = {
       series: [
         {
-          name: this.L4ThisYear,
+          name: this.UltimoAgno.getFullYear(),
           data: this.L4Values,
         },
         {
-          name: this.L4OtherYear,
+          name: this.agnoSeleccionado,
           data: this.L4ValuesOtherYear,
         },
       ],
@@ -279,7 +320,7 @@ export class ChartsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.crearVariables();
+    this.ObtenerData(this.ciudad);
     this.createCharts();
   }
 }

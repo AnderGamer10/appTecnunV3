@@ -15,8 +15,7 @@ export class HttpService {
   private API_RESPUESTAS = 'https://localhost:5001/api/Respuestas';
   private API_CLIENTES = 'https://localhost:5001/api/Clientes';
   private API_PREGUNTAS = 'https://localhost:5001/api/Preguntas';
-  // private API_PREGUNTAS_SUBDIMENSIONES =
-  //   'https://localhost:5001/api/Preguntas/Subdimensiones';
+  private API_SUBDIMENSIONES = 'https://localhost:5001/api/Subdimensiones';
   private API_ELEMENTOS = 'https://localhost:5001/api/Elementos';
   private API_PREGUNTASTABLA = 'https://localhost:5001/api/PreguntasTablas';
   constructor(private http: HttpClient) {}
@@ -38,9 +37,9 @@ export class HttpService {
   public getPreguntas() {
     return this.http.get<Preguntas>(this.API_PREGUNTAS);
   }
-  // public getSubdimensiones() {
-  //   return this.http.get(this.API_PREGUNTAS_SUBDIMENSIONES);
-  // }
+  public getSubdimensiones() {
+    return this.http.get(this.API_SUBDIMENSIONES);
+  }
   public getElementos() {
     return this.http.get<Elementos>(this.API_ELEMENTOS);
   }

@@ -47,10 +47,10 @@
                     <mat-form-field class="challenge" appearance="outline">
                         <mat-label>Can you rank the city's main challenges? The first one being the most important.
                         </mat-label>
-                        <textarea matInput placeholder="Construction..." id="challenge"></textarea>
+                        <textarea [(ngModel)]="challenge" matInput placeholder="Construction..." id="challenge" [ngModelOptions]="{standalone: true}"></textarea>
                     </mat-form-field>
                 </div>
-                <app-questions [paginaActual]="paginaActual" [cantPaginas]="cantPaginas" [subdimensiones]="subdimensiones" [Email]="Email" [ciudad]="ciudad" [role]="role" [yearsExperience]="yearsExperience" ></app-questions>
+                <app-questions [paginaActual]="paginaActual" [cantPaginas]="cantPaginas" [subdimensiones]="subdimensiones" [Email]="Email" [ciudad]="ciudad" [role]="role" [yearsExperience]="yearsExperience" [challenge]="challenge"></app-questions>
             </form>
         </div>
         <div class="controls">

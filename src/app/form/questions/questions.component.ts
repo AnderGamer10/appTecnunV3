@@ -17,6 +17,7 @@ export class QuestionsComponent implements OnInit {
   @Input() Email: any | undefined;
   @Input() yearsExperience: any | undefined;
   @Input() role: any | undefined;
+  @Input() challenge: any | undefined;
 
   preguntas: any = {};
   elementos: any = {};
@@ -49,25 +50,7 @@ export class QuestionsComponent implements OnInit {
       );
   }
 
-  mostrarDatos() {
-    // Obtendre la cantidad de respuestas elegidas para saber los "puntos" que tendra la pregunta.
-    // En el futuro cambiarlo para obtener cual ha sido seleccionado. ----------------------------
-    console.log($('input[name="l4q3"]:checked').length);
-
-    // console.log($('input[name="l4q3"]:checked'));
-    // console.log($('input[name="l4q3"]:checked').val());
-    // console.log($('input[name="l4q3"]:checked').attr('id'));
-    // $('input[name="l4q3"]:checked').map((d) => {
-    //   console.log(d);
-    // });
-  }
-
   ngOnInit(): void {
-    // this.questionsService.getSubdimensiones().subscribe((resp) => {
-    //   for (let i = 0; i < resp; i++) {
-    //     console.log(resp);
-    //   }
-    // });
     this.questionsService.getPreguntas().subscribe((resp) => {
       this.preguntas = resp;
     });
@@ -84,11 +67,12 @@ export class QuestionsComponent implements OnInit {
   postData() {
     sessionStorage.setItem('ciudad', this.ciudad);
     const date = new Date();
+
     let cliente: Clientes = {
       email: this.Email.value,
       profesionalRole: this.role,
       yearsOfExperience: this.yearsExperience.value,
-      mainChallenges: 's',
+      mainChallenges: this.challenge,
     };
     this.questionsService.postClientData(cliente).subscribe((data) => {
       console.log(data);
