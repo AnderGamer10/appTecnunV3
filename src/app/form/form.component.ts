@@ -84,6 +84,7 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    sessionStorage.setItem('ciudad', '');
     this.questionsService.getSubdimensiones().subscribe((resp) => {
       this.subInfo = resp;
       for (let i = 0; i < this.subInfo.length; i++) {

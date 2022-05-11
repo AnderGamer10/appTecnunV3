@@ -65,9 +65,7 @@ export class QuestionsComponent implements OnInit {
     });
   }
   postData() {
-    sessionStorage.setItem('ciudad', this.ciudad);
     const date = new Date();
-
     let cliente: Clientes = {
       email: this.Email.value,
       profesionalRole: this.role,
@@ -166,5 +164,6 @@ export class QuestionsComponent implements OnInit {
           break;
       }
     });
+    sessionStorage.setItem('ciudad', this.ciudad);
   }
 }
