@@ -15,3 +15,17 @@ export interface ElementosPreguntas {
   idPregunta: string;
   valor: number;
 }
+export interface Clientes {
+  email: String;
+  profesionalRole: String;
+  yearsOfExperience: number;
+  mainChallenges?: String;
+}
+export interface dataInfo {
+  idRespuesta?: number;
+  ciudad: String;
+  año: number;
+  email: String;
+  idPregunta: String;
+  respuesta: Number;
+}

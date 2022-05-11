@@ -1,0 +1,12 @@
+.chart-view{
+    width: 660px;
+    margin: 50px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding-top: 15px;
+    padding-left: 150px;
+    padding-right: 150px;
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+}

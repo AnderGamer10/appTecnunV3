@@ -1,148 +1,166 @@
-<div id="layout-wrapper">
-    <header id="page-topbar" class="d-flex flex-wrap align-items-center">
-        <div class="navbar-header d-flex flex-row bg-dark text-light justify-content-center">
-            <img src="../../assets/images/logo.png" alt="">
-        </div> 
-    </header>
-    <div id="vertical-menu" class="bg-dark text-light">
-        afssdfsd
-    </div>
-    <div id="main-content" class="bg-light text-dark">
-        <div id="charts-content">
-            <div class="container-fluid">
-                <div class="pl-5 pt-5 pb-3">
-                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Dashboard</h4>
-
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Main</li>
-                            </ol>
-                        </div>
-
-                    </div>
-                </div>
-                <div id="welcome" class="bg-primary bg-soft">
-                    <h4 class="text-primary mb-sm-0 font-size-18">Welcome {{this.email}}</h4>
-                </div>
-                <div>
-                    <div id="mainChart" class="d-flex flex-row justify-content-center">
-                        <div class="chart-view">
-                            <apx-chart [series]="radarL4Chart.series" [chart]="radarL4Chart.chart" [xaxis]="radarL4Chart.xaxis"
-                            [stroke]="radarL4Chart.stroke" [markers]="radarL4Chart.markers" [fill]="radarL4Chart.fill"
-                            [title]="radarL4Chart.title" [yaxis]="radarL4Chart.yaxis"></apx-chart>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div id="L-Dimension">
-                        <div class="DimensionTitle bg-secondary bg-soft">
-                            <h4 class="text-light mb-sm-0 font-size-18">L Dimension</h4>
-                        </div>
-                        <div class="d-flex flex-wrap justify-content-center" id="sub-charts">
-                            <div class="chart-view">
-                                <apx-chart [series]="radarL4Chart.series" [chart]="radarL4Chart.chart" [xaxis]="radarL4Chart.xaxis"
-                                [stroke]="radarL4Chart.stroke" [markers]="radarL4Chart.markers" [fill]="radarL4Chart.fill"
-                                [title]="radarL4Chart.title" [yaxis]="radarL4Chart.yaxis"></apx-chart>
-                                <button type="button" class="btn btn-primary">More info</button>
-                            </div>
-                            <div class="chart-view">
-                                <apx-chart [series]="radarL4Chart.series" [chart]="radarL4Chart.chart" [xaxis]="radarL4Chart.xaxis"
-                                [stroke]="radarL4Chart.stroke" [markers]="radarL4Chart.markers" [fill]="radarL4Chart.fill"
-                                [title]="radarL4Chart.title" [yaxis]="radarL4Chart.yaxis"></apx-chart>
-                                <button type="button" class="btn btn-primary">More info</button>
-                            </div> 
-                        </div>
-                        <div class="d-flex flex-wrap justify-content-center" id="sub-charts">
-                            <div class="chart-view">
-                                <apx-chart [series]="radarL4Chart.series" [chart]="radarL4Chart.chart" [xaxis]="radarL4Chart.xaxis"
-                                [stroke]="radarL4Chart.stroke" [markers]="radarL4Chart.markers" [fill]="radarL4Chart.fill"
-                                [title]="radarL4Chart.title" [yaxis]="radarL4Chart.yaxis"></apx-chart>
-                                <button type="button" class="btn btn-primary">More info</button>
-                            </div>
-                            <div class="chart-view">
-                                <apx-chart [series]="radarL4Chart.series" [chart]="radarL4Chart.chart" [xaxis]="radarL4Chart.xaxis"
-                                [stroke]="radarL4Chart.stroke" [markers]="radarL4Chart.markers" [fill]="radarL4Chart.fill"
-                                [title]="radarL4Chart.title" [yaxis]="radarL4Chart.yaxis"></apx-chart>
-                                <button type="button" class="btn btn-primary">More info</button>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div id="P-Dimension">
-                        <div class="DimensionTitle bg-secondary bg-soft">
-                            <h4 class="text-light mb-sm-0 font-size-18">P Dimension</h4>
-                        </div>
-                        <div class="d-flex flex-wrap justify-content-center" id="sub-charts">
-                            <div class="chart-view">
-                                <apx-chart [series]="radarL4Chart.series" [chart]="radarL4Chart.chart" [xaxis]="radarL4Chart.xaxis"
-                                [stroke]="radarL4Chart.stroke" [markers]="radarL4Chart.markers" [fill]="radarL4Chart.fill"
-                                [title]="radarL4Chart.title" [yaxis]="radarL4Chart.yaxis"></apx-chart>
-                                <button type="button" class="btn btn-primary">More info</button>
-                            </div>
-                            <div class="chart-view">
-                                <apx-chart [series]="radarL4Chart.series" [chart]="radarL4Chart.chart" [xaxis]="radarL4Chart.xaxis"
-                                [stroke]="radarL4Chart.stroke" [markers]="radarL4Chart.markers" [fill]="radarL4Chart.fill"
-                                [title]="radarL4Chart.title" [yaxis]="radarL4Chart.yaxis"></apx-chart>
-                                <button type="button" class="btn btn-primary">More info</button>
-                            </div> 
-                        </div>
-                    </div>
-                    <hr>
-                    <div id="I-Dimension">
-                        <div class="DimensionTitle bg-secondary bg-soft">
-                            <h4 class="text-light mb-sm-0 font-size-18">I Dimension</h4>
-                        </div>
-                        <div class="d-flex flex-wrap justify-content-center" id="sub-charts">
-                            <div class="chart-view">
-                                <apx-chart [series]="radarL4Chart.series" [chart]="radarL4Chart.chart" [xaxis]="radarL4Chart.xaxis"
-                                [stroke]="radarL4Chart.stroke" [markers]="radarL4Chart.markers" [fill]="radarL4Chart.fill"
-                                [title]="radarL4Chart.title" [yaxis]="radarL4Chart.yaxis"></apx-chart>
-                                <button type="button" class="btn btn-primary">More info</button>
-                            </div>
-                            <div class="chart-view">
-                                <apx-chart [series]="radarL4Chart.series" [chart]="radarL4Chart.chart" [xaxis]="radarL4Chart.xaxis"
-                                [stroke]="radarL4Chart.stroke" [markers]="radarL4Chart.markers" [fill]="radarL4Chart.fill"
-                                [title]="radarL4Chart.title" [yaxis]="radarL4Chart.yaxis"></apx-chart>
-                                <button type="button" class="btn btn-primary">More info</button>
-                            </div> 
-                        </div>
-                    </div>
-                    <hr>
-                    <div id="C-Dimension">
-                        <div class="DimensionTitle bg-secondary bg-soft">
-                            <h4 class="text-light mb-sm-0 font-size-18">C Dimension</h4>
-                        </div>
-                        <div class="d-flex flex-wrap justify-content-center" id="sub-charts">
-                            <div class="chart-view">
-                                <apx-chart [series]="radarL4Chart.series" [chart]="radarL4Chart.chart" [xaxis]="radarL4Chart.xaxis"
-                                [stroke]="radarL4Chart.stroke" [markers]="radarL4Chart.markers" [fill]="radarL4Chart.fill"
-                                [title]="radarL4Chart.title" [yaxis]="radarL4Chart.yaxis"></apx-chart>
-                                <button type="button" class="btn btn-primary">More info</button>
-                            </div>
-                            <div class="chart-view">
-                                <apx-chart [series]="radarL4Chart.series" [chart]="radarL4Chart.chart" [xaxis]="radarL4Chart.xaxis"
-                                [stroke]="radarL4Chart.stroke" [markers]="radarL4Chart.markers" [fill]="radarL4Chart.fill"
-                                [title]="radarL4Chart.title" [yaxis]="radarL4Chart.yaxis"></apx-chart>
-                                <button type="button" class="btn btn-primary">More info</button>
-                            </div> 
-                        </div>
-                    </div>
-                </div>
+<div id="layout-wrapper" class="d-flex bg-white">
+    <div>
+        <div id="sidebar-container">
+            <div class="logo">
+                <img src="../../assets/images/logo.png" alt="">
+            </div> 
+            <div class="menu">
+                <a href="#" class="d-block p-3"><i class="bi bi-app me-2 lead"></i> Dashboard</a>
+                <a href="#" class="d-block p-3"><i class="bi bi-person me-2 lead"></i> Perfil</a>
             </div>
         </div>
-        <footer class="d-flex flex-wrap bg-light text-dark justify-content-between align-items-center">
-            <div class="col-md-4 d-flex align-items-center">
-                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                    <svg class="bi" width="30" height="24">
-                        <use xlink:href="#bootstrap" />
-                    </svg>
-                </a>
-                <span class="text-muted">&copy; 2022 SMR Project</span>
-            </div>
-        </footer> 
     </div>
+    <div class="w-100">
+        <div id="content">
+            <section>
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <button *ngIf="vistaMain == false" (click)="vistaMain = true;DashboardView = 'Main';" class="bi bi-arrow-left flecha"></button>
+                    <div id="city" class="bg-primary bg-soft m-3 p-3">
+                        <h4 class="text-light mb-sm-0">{{ciudad}}</h4>
+                    </div>
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a (click)="this.vistaMain = true;
+                                this.DashboardView = 'Main';" href="javascript: void(0);">Dashboard</a></li>
+                            <li class="breadcrumb-item active">{{DashboardView}}</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+            <div id="main-content" class="bg-light text-dark">
+                <div id="charts-content">
+                    <div class="container-fluid">
+                        <div *ngIf="vistaMain == true">
+                            <div>
+                                <div id="L-Dimension">
+                                    <div class="DimensionTitle bg-secondary bg-soft">
+                                        <h4 class="text-light mb-sm-0">L Dimension</h4>
+                                    </div>
+                                    <div class="d-flex flex-wrap justify-content-center">
+                                        <div class="chart-view">
+                                            <apx-chart [series]="radarL1Chart.series" [chart]="radarL1Chart.chart" [xaxis]="radarL1Chart.xaxis"
+                                            [stroke]="radarL1Chart.stroke" [markers]="radarL1Chart.markers" [fill]="radarL1Chart.fill"
+                                            [title]="radarL1Chart.title" [yaxis]="radarL1Chart.yaxis"></apx-chart>
+                                            <button (click)="cambiarVista('L1')" type="button" class="btn btn-primary">More info</button>
+                                        </div>
+                                        <div class="chart-view">
+                                            <apx-chart [series]="radarL2Chart.series" [chart]="radarL2Chart.chart" [xaxis]="radarL2Chart.xaxis"
+                                            [stroke]="radarL2Chart.stroke" [markers]="radarL2Chart.markers" [fill]="radarL2Chart.fill"
+                                            [title]="radarL2Chart.title" [yaxis]="radarL2Chart.yaxis"></apx-chart>
+                                            <button (click)="cambiarVista('L2')" type="button" class="btn btn-primary">More info</button>
+                                        </div> 
+                                    </div>
+                                    <div class="d-flex flex-wrap justify-content-center">
+                                        <div class="chart-view">
+                                            <apx-chart [series]="radarL3Chart.series" [chart]="radarL3Chart.chart" [xaxis]="radarL3Chart.xaxis"
+                                            [stroke]="radarL3Chart.stroke" [markers]="radarL3Chart.markers" [fill]="radarL3Chart.fill"
+                                            [title]="radarL3Chart.title" [yaxis]="radarL3Chart.yaxis"></apx-chart>
+                                            <button (click)="cambiarVista('L3')" type="button" class="btn btn-primary">More info</button>
+                                        </div>
+                                        <div class="chart-view">
+                                            <apx-chart [series]="radarL4Chart.series" [chart]="radarL4Chart.chart" [xaxis]="radarL4Chart.xaxis"
+                                            [stroke]="radarL4Chart.stroke" [markers]="radarL4Chart.markers" [fill]="radarL4Chart.fill"
+                                            [title]="radarL4Chart.title" [yaxis]="radarL4Chart.yaxis"></apx-chart>
+                                            <button (click)="cambiarVista('L4')" type="button" class="btn btn-primary">More info</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="P-Dimension">
+                                    <hr>
+                                    <div class="DimensionTitle bg-secondary bg-soft">
+                                        <h4 class="text-light mb-sm-0">P Dimension</h4>
+                                    </div>
+                                    <div class="d-flex flex-wrap justify-content-center">
+                                        <div class="chart-view">
+                                            <apx-chart [series]="radarP1Chart.series" [chart]="radarP1Chart.chart" [xaxis]="radarP1Chart.xaxis"
+                                            [stroke]="radarP1Chart.stroke" [markers]="radarP1Chart.markers" [fill]="radarP1Chart.fill"
+                                            [title]="radarP1Chart.title" [yaxis]="radarP1Chart.yaxis"></apx-chart>
+                                            <button (click)="cambiarVista('P1')" type="button" class="btn btn-primary">More info</button>
+                                        </div>
+                                        <div class="chart-view">
+                                            <apx-chart [series]="radarP2Chart.series" [chart]="radarP2Chart.chart" [xaxis]="radarP2Chart.xaxis"
+                                            [stroke]="radarP2Chart.stroke" [markers]="radarP2Chart.markers" [fill]="radarP2Chart.fill"
+                                            [title]="radarP2Chart.title" [yaxis]="radarP2Chart.yaxis"></apx-chart>
+                                            <button (click)="cambiarVista('P2')" type="button" class="btn btn-primary">More info</button>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div id="I-Dimension">
+                                    <hr>
+                                    <div class="DimensionTitle bg-secondary bg-soft">
+                                        <h4 class="text-light mb-sm-0">I Dimension</h4>
+                                    </div>
+                                    <div class="d-flex flex-wrap justify-content-center">
+                                        <div class="chart-view">
+                                            <apx-chart [series]="radarI1Chart.series" [chart]="radarI1Chart.chart" [xaxis]="radarI1Chart.xaxis"
+                                            [stroke]="radarI1Chart.stroke" [markers]="radarI1Chart.markers" [fill]="radarI1Chart.fill"
+                                            [title]="radarI1Chart.title" [yaxis]="radarI1Chart.yaxis"></apx-chart>
+                                            <button (click)="cambiarVista('I1')" type="button" class="btn btn-primary">More info</button>
+                                        </div>
+                                        <div class="chart-view">
+                                            <apx-chart [series]="radarI2Chart.series" [chart]="radarI2Chart.chart" [xaxis]="radarI2Chart.xaxis"
+                                            [stroke]="radarI2Chart.stroke" [markers]="radarI2Chart.markers" [fill]="radarI2Chart.fill"
+                                            [title]="radarI2Chart.title" [yaxis]="radarI2Chart.yaxis"></apx-chart>
+                                            <button (click)="cambiarVista('I2')" type="button" class="btn btn-primary">More info</button>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div id="U-Dimension">
+                                    <hr>
+                                    <div class="DimensionTitle bg-secondary bg-soft">
+                                        <h4 class="text-light mb-sm-0">U Dimension</h4>
+                                    </div>
+                                    <div class="d-flex flex-wrap justify-content-center">
+                                        <div class="chart-view">
+                                            <apx-chart [series]="radarU1Chart.series" [chart]="radarU1Chart.chart" [xaxis]="radarU1Chart.xaxis"
+                                            [stroke]="radarU1Chart.stroke" [markers]="radarU1Chart.markers" [fill]="radarU1Chart.fill"
+                                            [title]="radarU1Chart.title" [yaxis]="radarU1Chart.yaxis"></apx-chart>
+                                            <button (click)="cambiarVista('U1')" type="button" class="btn btn-primary">More info</button>
+                                        </div>
+                                        <div class="chart-view">
+                                            <apx-chart [series]="radarU2Chart.series" [chart]="radarU2Chart.chart" [xaxis]="radarU2Chart.xaxis"
+                                            [stroke]="radarU2Chart.stroke" [markers]="radarU2Chart.markers" [fill]="radarU2Chart.fill"
+                                            [title]="radarU2Chart.title" [yaxis]="radarU2Chart.yaxis"></apx-chart>
+                                            <button (click)="cambiarVista('U2')" type="button" class="btn btn-primary">More info</button>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div id="C-Dimension">
+                                    <hr>
+                                    <div class="DimensionTitle bg-secondary bg-soft">
+                                        <h4 class="text-light mb-sm-0">C Dimension</h4>
+                                    </div>
+                                    <div class="d-flex flex-wrap justify-content-center">
+                                        <div class="chart-view">
+                                            <apx-chart [series]="radarC1Chart.series" [chart]="radarC1Chart.chart" [xaxis]="radarC1Chart.xaxis"
+                                            [stroke]="radarC1Chart.stroke" [markers]="radarC1Chart.markers" [fill]="radarC1Chart.fill"
+                                            [title]="radarC1Chart.title" [yaxis]="radarC1Chart.yaxis"></apx-chart>
+                                            <button (click)="cambiarVista('C1')" type="button" class="btn btn-primary">More info</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="vistaMain == false">
+                            <app-chart-view [subdimension]="DashboardView"></app-chart-view>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="d-flex flex-wrap bg-light text-dark justify-content-between align-items-center">
+                <div class="col-md-4 d-flex align-items-center">
+                    <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                        <svg class="bi" width="30" height="24">
+                            <use xlink:href="#bootstrap" />
+                        </svg>
+                    </a>
+                    <span class="text-muted">&copy; 2022 SMR Project</span>
+                </div>
+            </footer> 
+        </div>
+    </div>
+    
 </div>
+
 
 

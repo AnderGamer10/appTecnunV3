@@ -12,15 +12,10 @@
     leads to using the resource efficiently
 </div>
 <!-- Preguntas -->
-<div>
-    <div [ngStyle]="{'display': paginaActual === 2 ? 'block' : 'none'}">
-        <p>L1</p>
-        <div *ngFor="let mainItem of filtrarSubdimension('L1')"> </div>
-    </div>
-
-    <div [ngStyle]="{'display': paginaActual === 3 ? 'block' : 'none'}">
-        <p>L2</p>
-        <div *ngFor="let mainItem of filtrarSubdimension('L2')"> 
+<div *ngFor="let subs of subdimensiones; index as i">
+    <div *ngIf="datosObtenidos" id="{{subs}}" [ngStyle]="{'display': paginaActual === i+2 ? 'block' : 'none'}">
+        <p>{{subs}}</p>
+        <div *ngFor="let mainItem of filtrarSubdimension(subs)"> 
             <h3><b>{{mainItem.pregunta}}</b></h3>
             <div *ngIf="mainItem.tipoPregunta === 'table'">
                 <table class="table table-sm table-hover">
@@ -45,9 +40,9 @@
                 </table>
             </div>
             <div *ngIf="mainItem.tipoPregunta === 'radio'">
-                <mat-radio-group aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
-                    <mat-radio-button name="{{mainItem.preguntaId}}" class="radioButton"
-                        *ngFor="let item of filtrarElementos(mainItem.preguntaId)" [value]="item.valor">
+                <mat-radio-group [name]="mainItem.preguntaId" aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
+                    <mat-radio-button class="radioButton"
+                        *ngFor="let item of filtrarElementos(mainItem.preguntaId)" [value]="item.valor" >
                         {{item.elemento}}
                     </mat-radio-button>
                 </mat-radio-group>
@@ -55,89 +50,20 @@
             <div *ngIf="mainItem.tipoPregunta === 'checkbox'">
                 <section class="{{mainItem.preguntaId}}">
                     <p *ngFor="let item of filtrarElementos(mainItem.preguntaId)">
-                        <mat-checkbox value="{{item.elemento}}" (change)="mostrarDatos()"
+                        <mat-checkbox value="{{item.elemento}}" 
                             name="{{mainItem.preguntaId}}">{{item.elemento}}</mat-checkbox>
                     </p>
                 </section>
             </div>
         </div>
-    </div>
-
-    <div [ngStyle]="{'display': paginaActual === 4 ? 'block' : 'none'}">
-        <p>L3</p>
-        <div *ngFor="let mainItem of filtrarSubdimension('L3')"> </div>
-    </div>
-
-    <div [ngStyle]="{'display': paginaActual === 5 ? 'block' : 'none'}">
-        <p>L4</p>
-        <div *ngFor="let mainItem of filtrarSubdimension('L4')">
-            <h3><b>{{mainItem.pregunta}}</b></h3>
-            <div *ngIf="mainItem.tipoPregunta === 'table'">
-                <table class="table table-sm table-hover">
-                    <thead>
-                        <tr>
-                            <th>Element</th>
-                            <th *ngFor="let item of filtrarTablaPreguntas(mainItem.preguntaId)">
-                                {{item.elementoPregunta}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let itemElemento of filtrarElementos(mainItem.preguntaId)">
-                            <td>{{itemElemento.elemento}}</td>
-                            <td *ngFor="let item of filtrarTablaPreguntas(mainItem.preguntaId); let i = index">
-                                <input *ngIf="itemElemento.tipoPregunta === 'radio'" type="radio" name="{{mainItem.preguntaId}}a{{itemElemento.valor}}"
-                                    value="{{i+1}}">
-                                <input *ngIf="itemElemento.tipoPregunta === 'checkbox'" type="checkbox" name="{{mainItem.preguntaId}}a{{itemElemento.valor}}"
-                                value="{{i+1}}">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div *ngIf="mainItem.tipoPregunta === 'radio'">
-                <mat-radio-group aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
-                    <mat-radio-button name="{{mainItem.preguntaId}}" class="radioButton"
-                        *ngFor="let item of filtrarElementos(mainItem.preguntaId)" [value]="item.valor">
-                        {{item.elemento}}
-                    </mat-radio-button>
-                </mat-radio-group>
-            </div>
-            <div *ngIf="mainItem.tipoPregunta === 'checkbox'">
-                <section class="{{mainItem.preguntaId}}">
-                    <p *ngFor="let item of filtrarElementos(mainItem.preguntaId)">
-                        <mat-checkbox value="{{item.elemento}}" (change)="mostrarDatos()"
-                            name="{{mainItem.preguntaId}}">{{item.elemento}}</mat-checkbox>
-                    </p>
-                </section>
-            </div>
-            <!-- <div *ngIf="mainItem.tipoPregunta === 'mix'">
-                    <mat-radio-group aria-labelledby="{{mainItem.preguntaId}}Label" class="radioGroup">
-                        <mat-radio-button name="{{item}}" class="radioButton"
-                            *ngFor="let item of filtrarElementos(mainItem.preguntaId)" [value]="item.valor">
-                            {{item.elemento}}
-                        </mat-radio-button>
-                        <section class="{{mainItem.preguntaId}}">
-                            <p *ngFor="let item of filtrarElementos(mainItem.preguntaId)"><mat-checkbox formControlName="{{item.elemento}}">{{item.elemento}}</mat-checkbox></p>
-                        </section>
-                    </mat-radio-group>
-                </div> -->
-        </div>
-    </div>
-    <div [ngStyle]="{'display': paginaActual === 6 ? 'block' : 'none'}">
-        <p>P1</p>
-        <div *ngFor="let mainItem of filtrarSubdimension('P1')"> </div>
-    </div>
-    <div [ngStyle]="{'display': paginaActual === 7 ? 'block' : 'none'}">
-        <p>P2</p>
-        <div *ngFor="let mainItem of filtrarSubdimension('P2')"> </div>
     </div>
 </div>
 
 <!-- Ultima Fase - Agradecimiento -->
-<div *ngIf="paginaActual === 12" id="ultimaFase">
+<div *ngIf="paginaActual === cantPaginas" id="ultimaFase">
     <div id="final">
         <p>Thank you</p>
         <img src="./assets/images/logo.png" height=150 width=150> <br>
-        <button (click)="postData();" class="submit" type="button" value="Submit">Submit</button>
+        <button routerLink="/dashboard" *ngIf="dataSend === false" (click)="postData();" class="submit" type="button" value="Submit">Submit</button>
     </div>
 </div>

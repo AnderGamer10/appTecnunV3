@@ -2,13 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import * as $ from 'jquery';
 import { Router } from '@angular/router';
+import { HttpService } from '../services/http.service';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit {
-  constructor(public _router: Router) {}
+  constructor(public _router: Router, private questionsService: HttpService) {}
   Ciudades = ['Donostia', 'Valencia', 'Sevilla'];
   Professions = [
     'Local Goverment',
@@ -22,9 +23,10 @@ export class FormComponent implements OnInit {
     'National goverment',
     'Other',
   ];
-  // mostrarFormulario: boolean = true;
-
-  cantPaginas = 12;
+  challenge: string | undefined;
+  subInfo: any = {};
+  subdimensiones: any = [];
+  cantPaginas = 2;
   paginaActual = 0;
   avPag(): void {
     if (this.paginaActual < this.cantPaginas) {
@@ -81,12 +83,14 @@ export class FormComponent implements OnInit {
     this.role = value;
   }
 
-  // chartCreation() {
-  //   this.createChartsToChild.emit();
-  // }
-  // ocultarForm(): void {
-  //   this.ocultar.emit();
-  // }
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    sessionStorage.setItem('ciudad', '');
+    this.questionsService.getSubdimensiones().subscribe((resp) => {
+      this.subInfo = resp;
+      for (let i = 0; i < this.subInfo.length; i++) {
+        this.subdimensiones.push(this.subInfo[i].subdimension);
+      }
+      this.cantPaginas = this.subdimensiones.length + 2;
+    });
+  }
 }

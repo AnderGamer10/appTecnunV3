@@ -5,6 +5,8 @@ import {
   Elementos,
   ElementosPreguntas,
   Preguntas,
+  dataInfo,
+  Clientes,
 } from '../models/req-response';
 @Injectable({
   providedIn: 'root',
@@ -13,15 +15,17 @@ export class HttpService {
   private API_RESPUESTAS = 'https://localhost:5001/api/Respuestas';
   private API_CLIENTES = 'https://localhost:5001/api/Clientes';
   private API_PREGUNTAS = 'https://localhost:5001/api/Preguntas';
+  private API_SUBDIMENSIONES = 'https://localhost:5001/api/Subdimensiones';
   private API_ELEMENTOS = 'https://localhost:5001/api/Elementos';
   private API_PREGUNTASTABLA = 'https://localhost:5001/api/PreguntasTablas';
   constructor(private http: HttpClient) {}
 
-  public postClientData(cliente: any): Observable<any> {
-    return this.http.post(this.API_CLIENTES, cliente);
+  public postClientData(cliente: Clientes): Observable<Clientes> {
+    return this.http.post<Clientes>(this.API_CLIENTES, cliente);
   }
-  public postAnswer(respuesta: any): Observable<any> {
-    return this.http.post(this.API_RESPUESTAS, respuesta);
+
+  public postRespuestas(respuesta: dataInfo): Observable<dataInfo> {
+    return this.http.post<dataInfo>(this.API_RESPUESTAS, respuesta);
   }
 
   public getRespuestas() {
@@ -32,6 +36,9 @@ export class HttpService {
   }
   public getPreguntas() {
     return this.http.get<Preguntas>(this.API_PREGUNTAS);
+  }
+  public getSubdimensiones() {
+    return this.http.get(this.API_SUBDIMENSIONES);
   }
   public getElementos() {
     return this.http.get<Elementos>(this.API_ELEMENTOS);

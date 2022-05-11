@@ -1,45 +1,32 @@
-header{
-    display: block;
+#sidebar-container{
+    min-height: 100vh;
+    background-color: #111854;
 }
-#page-topbar{
-    top: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    position: fixed;
-    z-index: 1002;
-    background-color: #fff;
+#sidebar-container a{
+    text-decoration: none; 
+    color: white;
 }
-.navbar-header{
-    width: 250px;
+#sidebar-container a:hover{
+    color: rgb(56, 56, 251);
 }
-.navbar-header img{
-    height: 100px;
-    width: 120px;
+
+#sidebar-container .menu{
+    width: 18rem;
 }
-#vertical-menu{
-    width: 250px;
+
+#content{
+    background-color: white;
+    overflow-y: auto;
     height: 100vh;
-    position: fixed;
-    margin-top: 100px;
-    z-index: 1001;
 }
-#main-content{
-    margin-left: 250px;
-    overflow: hidden;
-    display: block;
-}
-#charts-content{
-    margin-top: 75px;
-    height: auto;
-    background-color: rgba(0,0,0,.03);
-}
-#welcome{
-    width: 450px;
-    margin-left: 20px;
-    padding: 10px;
+
+#city{
+    width: auto;
     border-radius: 0.25rem;
     box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+}
+#city h4{
+    font-size: 15px;
 }
 .DimensionTitle{
     width: 160px;
@@ -48,22 +35,15 @@ header{
     border-radius: 0.25rem;
     box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
 }
-.bg-primary.bg-soft {
-    background-color: rgba(85,110,230,.25)!important;
-}
-.btn-primary{
-    margin-bottom: 5px;
-    margin-left: 130px;
-}
-#sub-charts{
-}
+
 .chart-view{
     margin: 50px;
     margin-top: 25px;
     margin-bottom: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
     padding-top: 15px;
-    padding-left: 150px;
-    padding-right: 150px;
+    padding-bottom: 10px;
     background-color: white;
     border-radius: 0.25rem;
     box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
@@ -71,15 +51,28 @@ header{
 footer{
     height: 75px;
 }
-@media(max-width:920px){
-    #vertical-menu{
-        width: 0px;
-    }
-    #main-content{
-        margin-left: 0px;
-    }
-    .navbar-header img{
-        height: 80px;
-        width: 100px;
-    }
+.logo{
+    text-align: center;
+}
+.logo img{
+    margin-top: 5px;
+    height: 65px;
+    width: 100px;
+}
+.flecha{
+    font-size: 30px;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 50px;
+    height: 50px;
+    padding: 8px 13px;
+    border-radius: 30px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+.page-title-box{
+    background-color: rgba(0,0,0,.03);
+}
+#fondo{
+    background-color: rgba(0,0,0,.03);
 }
