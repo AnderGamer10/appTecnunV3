@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as ApexCharts from 'apexcharts';
+import { HttpService } from 'src/app/services/http.service';
 export type RadarChart = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -15,17 +16,25 @@ export type RadarChart = {
   styleUrls: ['./chart-view.component.css'],
 })
 export class ChartViewComponent implements OnInit {
-  public radarChart: Partial<RadarChart> | any;
   @Input() subdimension: string | undefined;
-  constructor() {}
+
+  public radarChart: Partial<RadarChart> | any;
+
+  constructor(private questionsService: HttpService) {}
+  agnoSeleccionado: number = 2020;
+  UltimoAgno: Date = new Date();
 
   ngOnInit(): void {
     console.log(this.subdimension);
     this.radarChart = {
       series: [
         {
-          name: 'Value',
-          data: [3, 3, 5, 1, 4, 3, 4, 5],
+          name: this.UltimoAgno.getFullYear(),
+          data: [0],
+        },
+        {
+          name: this.agnoSeleccionado,
+          data: [0],
         },
       ],
       chart: {
@@ -48,10 +57,10 @@ export class ChartViewComponent implements OnInit {
         },
       },
       title: {
-        text: 'Resilience action plan development',
+        text: 'Municipality, cross-sectorial and multigovernance collaboration',
       },
       xaxis: {
-        categories: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'],
+        categories: ['Q1', 'Q2', 'Q3'],
       },
       yaxis: {
         min: 0,

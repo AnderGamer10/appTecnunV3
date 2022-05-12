@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import * as $ from 'jquery';
 import { Router } from '@angular/router';
 import { HttpService } from '../services/http.service';
 @Component({
