@@ -699,6 +699,10 @@ export class ChartsComponent implements OnInit {
 
   ngOnInit(): void {
     this.createCharts();
-    setInterval(() => this.ObtenerData(this.ciudad), 5000);
+    setTimeout(() => {
+      this.ObtenerData(this.ciudad);
+    }, 3000);
+
+    setInterval(() => this.ObtenerData(this.ciudad), 600000);
   }
 }
