@@ -37,7 +37,33 @@ export class ChartsComponent implements OnInit {
   agnoSeleccionado: number = 2020;
   UltimoAgno: Date = new Date();
 
-  cambiarVista(subdimension: string): void {
+  preguntas: any;
+  titulo: string | undefined;
+  datosChart: any;
+
+  subdimensionesNombre = [
+    'radarL1Chart',
+    'radarL2Chart',
+    'radarL3Chart',
+    'radarL4Chart',
+    'radarP1Chart',
+    'radarP2Chart',
+    'radarI1Chart',
+    'radarI2Chart',
+    'radarU1Chart',
+    'radarU2Chart',
+    'radarC1Chart',
+  ];
+
+  cambiarVista(
+    subdimension: string,
+    titulo: string,
+    datosChart: object,
+    preguntas: object
+  ): void {
+    this.preguntas = preguntas;
+    this.datosChart = datosChart;
+    this.titulo = titulo;
     this.vistaMain = false;
     this.DashboardView = subdimension;
   }
@@ -633,19 +659,6 @@ export class ChartsComponent implements OnInit {
       this.radarU2Chart,
       this.radarC1Chart,
     ];
-    let subdimensionesNombre = [
-      'radarL1Chart',
-      'radarL2Chart',
-      'radarL3Chart',
-      'radarL4Chart',
-      'radarP1Chart',
-      'radarP2Chart',
-      'radarI1Chart',
-      'radarI2Chart',
-      'radarU1Chart',
-      'radarU2Chart',
-      'radarC1Chart',
-    ];
     for (let i = 0; i < subdimensiones.length; i++) {
       let longitud = subdimensiones[i].series[0].data.length;
       let data1 = [];
@@ -653,13 +666,17 @@ export class ChartsComponent implements OnInit {
       for (let j = 0; j < longitud; j++) {
         data1.push(
           this.obtenerDataSubdimension(
-            `${subdimensionesNombre[i].substring(5, 7).toLowerCase()}q${j + 1}`,
+            `${this.subdimensionesNombre[i].substring(5, 7).toLowerCase()}q${
+              j + 1
+            }`,
             2022
           )
         );
         data2.push(
           this.obtenerDataSubdimension(
-            `${subdimensionesNombre[i].substring(5, 7).toLowerCase()}q${j + 1}`,
+            `${this.subdimensionesNombre[i].substring(5, 7).toLowerCase()}q${
+              j + 1
+            }`,
             this.agnoSeleccionado
           )
         );
@@ -682,6 +699,6 @@ export class ChartsComponent implements OnInit {
 
   ngOnInit(): void {
     this.createCharts();
-    this.ObtenerData(this.ciudad);
+    setInterval(() => this.ObtenerData(this.ciudad), 5000);
   }
 }

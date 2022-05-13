@@ -17,24 +17,25 @@ export type RadarChart = {
 })
 export class ChartViewComponent implements OnInit {
   @Input() subdimension: string | undefined;
+  @Input() Respuestas: any;
+  @Input() preguntas: any;
+  @Input() titulo: any;
+  @Input() datosChart: any;
 
   public radarChart: Partial<RadarChart> | any;
 
   constructor(private questionsService: HttpService) {}
-  agnoSeleccionado: number = 2020;
-  UltimoAgno: Date = new Date();
 
-  ngOnInit(): void {
-    console.log(this.subdimension);
+  createChart() {
     this.radarChart = {
       series: [
         {
-          name: this.UltimoAgno.getFullYear(),
-          data: [0],
+          name: '',
+          data: [],
         },
         {
-          name: this.agnoSeleccionado,
-          data: [0],
+          name: '',
+          data: [],
         },
       ],
       chart: {
@@ -57,10 +58,10 @@ export class ChartViewComponent implements OnInit {
         },
       },
       title: {
-        text: 'Municipality, cross-sectorial and multigovernance collaboration',
+        text: this.titulo,
       },
       xaxis: {
-        categories: ['Q1', 'Q2', 'Q3'],
+        categories: this.preguntas,
       },
       yaxis: {
         min: 0,
@@ -68,5 +69,13 @@ export class ChartViewComponent implements OnInit {
         forceNiceScale: true,
       },
     };
+  }
+  dataInfo() {
+    this.radarChart.series = this.datosChart;
+  }
+
+  ngOnInit(): void {
+    this.createChart();
+    this.dataInfo();
   }
 }
