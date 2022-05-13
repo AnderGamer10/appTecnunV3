@@ -31,9 +31,6 @@ export class HttpService {
   public getRespuestas() {
     return this.http.get(this.API_RESPUESTAS);
   }
-  public getClientes() {
-    return this.http.get(this.API_CLIENTES);
-  }
   public getPreguntas() {
     return this.http.get<Preguntas>(this.API_PREGUNTAS);
   }

@@ -36,7 +36,37 @@ export class ChartsComponent implements OnInit {
   Respuestas: any = {};
   agnoSeleccionado: number = 2020;
   UltimoAgno: Date = new Date();
-  prueba: any = {};
+
+  preguntas: any;
+  titulo: string | undefined;
+  datosChart: any;
+
+  subdimensionesNombre = [
+    'radarL1Chart',
+    'radarL2Chart',
+    'radarL3Chart',
+    'radarL4Chart',
+    'radarP1Chart',
+    'radarP2Chart',
+    'radarI1Chart',
+    'radarI2Chart',
+    'radarU1Chart',
+    'radarU2Chart',
+    'radarC1Chart',
+  ];
+
+  cambiarVista(
+    subdimension: string,
+    titulo: string,
+    datosChart: object,
+    preguntas: object
+  ): void {
+    this.preguntas = preguntas;
+    this.datosChart = datosChart;
+    this.titulo = titulo;
+    this.vistaMain = false;
+    this.DashboardView = subdimension;
+  }
 
   async ObtenerData(ciudad: string) {
     await this.questionsService.getRespuestas().subscribe((resp) => {
@@ -49,25 +79,21 @@ export class ChartsComponent implements OnInit {
   }
 
   obtenerDataSubdimension(IdPregunta: string, agno: number) {
-    try {
-      let cantidad = this.Respuestas.filter(
+    let cantidad = this.Respuestas.filter(
+      (resp: { idPregunta: string; año: number }) =>
+        resp.idPregunta === IdPregunta && resp.año === agno
+    ).length;
+    let valor = 0;
+    for (let i = 0; i < cantidad; i++) {
+      valor += this.Respuestas.filter(
         (resp: { idPregunta: string; año: number }) =>
           resp.idPregunta === IdPregunta && resp.año === agno
-      ).length;
-      let valor = 0;
-      for (let i = 0; i < cantidad; i++) {
-        valor += this.Respuestas.filter(
-          (resp: { idPregunta: string; año: number }) =>
-            resp.idPregunta === IdPregunta && resp.año === agno
-        )[i].respuesta;
-      }
-      if (valor === 0) {
-        return 0;
-      } else {
-        return Math.floor(valor / cantidad);
-      }
-    } catch (error) {
+      )[i].respuesta;
+    }
+    if (valor === 0) {
       return 0;
+    } else {
+      return Math.floor(valor / cantidad);
     }
   }
 
@@ -103,318 +129,16 @@ export class ChartsComponent implements OnInit {
 
   U2Values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   U2ValuesOtherYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  DataInfo() {
-    this.radarL1Chart.series = [
-      {
-        data: [
-          this.obtenerDataSubdimension('l1q1', 2022),
-          this.obtenerDataSubdimension('l1q2', 2022),
-          this.obtenerDataSubdimension('l1q3', 2022),
-        ],
-      },
-      {
-        data: [
-          this.obtenerDataSubdimension('l1q1', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l1q2', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l1q3', this.agnoSeleccionado),
-        ],
-      },
-    ];
-
-    this.radarL2Chart.series = [
-      {
-        data: [
-          this.obtenerDataSubdimension('l2q1', 2022),
-          this.obtenerDataSubdimension('l2q2', 2022),
-          this.obtenerDataSubdimension('l2q3', 2022),
-          this.obtenerDataSubdimension('l2q4', 2022),
-          this.obtenerDataSubdimension('l2q5', 2022),
-          this.obtenerDataSubdimension('l2q6', 2022),
-        ],
-      },
-      {
-        data: [
-          this.obtenerDataSubdimension('l2q1', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l2q2', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l2q3', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l2q4', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l2q5', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l2q6', this.agnoSeleccionado),
-        ],
-      },
-    ];
-
-    this.radarL3Chart.series = [
-      {
-        data: [
-          this.obtenerDataSubdimension('l3q1', 2022),
-          this.obtenerDataSubdimension('l3q2', 2022),
-          this.obtenerDataSubdimension('l3q3', 2022),
-          this.obtenerDataSubdimension('l3q4', 2022),
-          this.obtenerDataSubdimension('l3q5', 2022),
-          this.obtenerDataSubdimension('l3q6', 2022),
-        ],
-      },
-      {
-        data: [
-          this.obtenerDataSubdimension('l3q1', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l3q2', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l3q3', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l3q4', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l3q5', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l3q6', this.agnoSeleccionado),
-        ],
-      },
-    ];
-
-    this.radarL4Chart.series = [
-      {
-        data: [
-          this.obtenerDataSubdimension('l4q1', 2022),
-          this.obtenerDataSubdimension('l4q2', 2022),
-          this.obtenerDataSubdimension('l4q3', 2022),
-          this.obtenerDataSubdimension('l4q4', 2022),
-          this.obtenerDataSubdimension('l4q5', 2022),
-          this.obtenerDataSubdimension('l4q6', 2022),
-          this.obtenerDataSubdimension('l4q7', 2022),
-          this.obtenerDataSubdimension('l4q8', 2022),
-        ],
-      },
-      {
-        data: [
-          this.obtenerDataSubdimension('l4q1', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l4q2', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l4q3', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l4q4', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l4q5', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l4q6', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l4q7', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('l4q8', this.agnoSeleccionado),
-        ],
-      },
-    ];
-    this.radarP1Chart.series = [
-      {
-        data: [
-          this.obtenerDataSubdimension('p1q1', 2022),
-          this.obtenerDataSubdimension('p1q2', 2022),
-          this.obtenerDataSubdimension('p1q3', 2022),
-          this.obtenerDataSubdimension('p1q4', 2022),
-          this.obtenerDataSubdimension('p1q5', 2022),
-          this.obtenerDataSubdimension('p1q6', 2022),
-          this.obtenerDataSubdimension('p1q7', 2022),
-          this.obtenerDataSubdimension('p1q8', 2022),
-        ],
-      },
-      {
-        data: [
-          this.obtenerDataSubdimension('p1q1', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('p1q2', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('p1q3', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('p1q4', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('p1q5', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('p1q6', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('p1q7', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('p1q8', this.agnoSeleccionado),
-        ],
-      },
-    ];
-    this.radarP2Chart.series = [
-      {
-        data: [
-          this.obtenerDataSubdimension('p2q1', 2022),
-          this.obtenerDataSubdimension('p2q2', 2022),
-          this.obtenerDataSubdimension('p2q3', 2022),
-          this.obtenerDataSubdimension('p2q4', 2022),
-          this.obtenerDataSubdimension('p2q5', 2022),
-          this.obtenerDataSubdimension('p2q6', 2022),
-          this.obtenerDataSubdimension('p2q7', 2022),
-        ],
-      },
-      {
-        data: [
-          this.obtenerDataSubdimension('p2q1', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('p2q2', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('p2q3', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('p2q4', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('p2q5', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('p2q6', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('p2q7', this.agnoSeleccionado),
-        ],
-      },
-    ];
-    this.radarI1Chart.series = [
-      {
-        data: [
-          this.obtenerDataSubdimension('i1q1', 2022),
-          this.obtenerDataSubdimension('i1q2', 2022),
-          this.obtenerDataSubdimension('i1q3', 2022),
-          this.obtenerDataSubdimension('i1q4', 2022),
-          this.obtenerDataSubdimension('i1q5', 2022),
-          this.obtenerDataSubdimension('i1q6', 2022),
-          this.obtenerDataSubdimension('i1q7', 2022),
-          this.obtenerDataSubdimension('i1q8', 2022),
-          this.obtenerDataSubdimension('i1q9', 2022),
-          this.obtenerDataSubdimension('i1q10', 2022),
-          this.obtenerDataSubdimension('i1q11', 2022),
-          this.obtenerDataSubdimension('i1q12', 2022),
-        ],
-      },
-      {
-        data: [
-          this.obtenerDataSubdimension('i1q1', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i1q2', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i1q3', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i1q4', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i1q5', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i1q6', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i1q7', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i1q8', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i1q9', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i1q10', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i1q11', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i1q12', this.agnoSeleccionado),
-        ],
-      },
-    ];
-    this.radarI2Chart.series = [
-      {
-        data: [
-          this.obtenerDataSubdimension('i2q1', 2022),
-          this.obtenerDataSubdimension('i2q2', 2022),
-          this.obtenerDataSubdimension('i2q3', 2022),
-          this.obtenerDataSubdimension('i2q4', 2022),
-          this.obtenerDataSubdimension('i2q5', 2022),
-          this.obtenerDataSubdimension('i2q6', 2022),
-          this.obtenerDataSubdimension('i2q7', 2022),
-          this.obtenerDataSubdimension('i2q8', 2022),
-        ],
-      },
-      {
-        data: [
-          this.obtenerDataSubdimension('i2q1', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i2q2', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i2q3', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i2q4', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i2q5', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i2q6', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i2q7', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('i2q8', this.agnoSeleccionado),
-        ],
-      },
-    ];
-    this.radarC1Chart.series = [
-      {
-        data: [
-          this.obtenerDataSubdimension('c1q1', 2022),
-          this.obtenerDataSubdimension('c1q2', 2022),
-          this.obtenerDataSubdimension('c1q3', 2022),
-          this.obtenerDataSubdimension('c1q4', 2022),
-          this.obtenerDataSubdimension('c1q5', 2022),
-          this.obtenerDataSubdimension('c1q6', 2022),
-          this.obtenerDataSubdimension('c1q7', 2022),
-          this.obtenerDataSubdimension('c1q8', 2022),
-          this.obtenerDataSubdimension('c1q9', 2022),
-          this.obtenerDataSubdimension('c1q10', 2022),
-          this.obtenerDataSubdimension('c1q11', 2022),
-          this.obtenerDataSubdimension('c1q12', 2022),
-        ],
-      },
-      {
-        data: [
-          this.obtenerDataSubdimension('c1q1', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('c1q2', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('c1q3', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('c1q4', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('c1q5', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('c1q6', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('c1q7', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('c1q8', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('c1q9', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('c1q10', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('c1q11', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('c1q12', this.agnoSeleccionado),
-        ],
-      },
-    ];
-    this.radarU1Chart.series = [
-      {
-        data: [
-          this.obtenerDataSubdimension('u1q1', 2022),
-          this.obtenerDataSubdimension('u1q2', 2022),
-          this.obtenerDataSubdimension('u1q3', 2022),
-          this.obtenerDataSubdimension('u1q4', 2022),
-          this.obtenerDataSubdimension('u1q5', 2022),
-          this.obtenerDataSubdimension('u1q6', 2022),
-          this.obtenerDataSubdimension('u1q7', 2022),
-          this.obtenerDataSubdimension('u1q8', 2022),
-          this.obtenerDataSubdimension('u1q9', 2022),
-          this.obtenerDataSubdimension('u1q10', 2022),
-        ],
-      },
-      {
-        data: [
-          this.obtenerDataSubdimension('u1q1', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u1q2', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u1q3', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u1q4', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u1q5', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u1q6', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u1q7', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u1q8', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u1q9', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u1q10', this.agnoSeleccionado),
-        ],
-      },
-    ];
-    this.radarU2Chart.series = [
-      {
-        data: [
-          this.obtenerDataSubdimension('u2q1', 2022),
-          this.obtenerDataSubdimension('u2q2', 2022),
-          this.obtenerDataSubdimension('u2q3', 2022),
-          this.obtenerDataSubdimension('u2q4', 2022),
-          this.obtenerDataSubdimension('u2q5', 2022),
-          this.obtenerDataSubdimension('u2q6', 2022),
-          this.obtenerDataSubdimension('u2q7', 2022),
-          this.obtenerDataSubdimension('u2q8', 2022),
-          this.obtenerDataSubdimension('u2q9', 2022),
-          this.obtenerDataSubdimension('u2q10', 2022),
-          this.obtenerDataSubdimension('u2q11', 2022),
-        ],
-      },
-      {
-        data: [
-          this.obtenerDataSubdimension('u2q1', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u2q2', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u2q3', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u2q4', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u2q5', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u2q6', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u2q7', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u2q8', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u2q9', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u2q10', this.agnoSeleccionado),
-          this.obtenerDataSubdimension('u2q11', this.agnoSeleccionado),
-        ],
-      },
-    ];
-  }
-
-  cambiarVista(subdimension: string): void {
-    this.vistaMain = false;
-    this.DashboardView = subdimension;
-  }
 
   createCharts() {
     this.radarL1Chart = {
       series: [
         {
-          name: this.UltimoAgno.getFullYear(),
+          name: '',
           data: this.L1Values,
         },
         {
-          name: this.agnoSeleccionado,
+          name: '',
           data: this.L1ValuesOtherYear,
         },
       ],
@@ -452,11 +176,11 @@ export class ChartsComponent implements OnInit {
     this.radarL2Chart = {
       series: [
         {
-          name: this.UltimoAgno.getFullYear(),
+          name: '',
           data: this.L2Values,
         },
         {
-          name: this.agnoSeleccionado,
+          name: '',
           data: this.L2ValuesOtherYear,
         },
       ],
@@ -494,11 +218,11 @@ export class ChartsComponent implements OnInit {
     this.radarL3Chart = {
       series: [
         {
-          name: this.UltimoAgno.getFullYear(),
+          name: '',
           data: this.L3Values,
         },
         {
-          name: this.agnoSeleccionado,
+          name: '',
           data: this.L3ValuesOtherYear,
         },
       ],
@@ -536,11 +260,11 @@ export class ChartsComponent implements OnInit {
     this.radarL4Chart = {
       series: [
         {
-          name: this.UltimoAgno.getFullYear(),
+          name: '',
           data: this.L4Values,
         },
         {
-          name: this.agnoSeleccionado,
+          name: '',
           data: this.L4ValuesOtherYear,
         },
       ],
@@ -579,11 +303,11 @@ export class ChartsComponent implements OnInit {
     this.radarP1Chart = {
       series: [
         {
-          name: this.UltimoAgno.getFullYear(),
+          name: '',
           data: this.P1Values,
         },
         {
-          name: this.agnoSeleccionado,
+          name: '',
           data: this.P1ValuesOtherYear,
         },
       ],
@@ -621,11 +345,11 @@ export class ChartsComponent implements OnInit {
     this.radarP2Chart = {
       series: [
         {
-          name: this.UltimoAgno.getFullYear(),
+          name: '',
           data: this.P2Values,
         },
         {
-          name: this.agnoSeleccionado,
+          name: '',
           data: this.P2ValuesOtherYear,
         },
       ],
@@ -663,11 +387,11 @@ export class ChartsComponent implements OnInit {
     this.radarC1Chart = {
       series: [
         {
-          name: this.UltimoAgno.getFullYear(),
+          name: '',
           data: this.C1Values,
         },
         {
-          name: this.agnoSeleccionado,
+          name: '',
           data: this.C1ValuesOtherYear,
         },
       ],
@@ -718,11 +442,11 @@ export class ChartsComponent implements OnInit {
     this.radarI1Chart = {
       series: [
         {
-          name: this.UltimoAgno.getFullYear(),
+          name: '',
           data: this.I1Values,
         },
         {
-          name: this.agnoSeleccionado,
+          name: '',
           data: this.I1ValuesOtherYear,
         },
       ],
@@ -773,11 +497,11 @@ export class ChartsComponent implements OnInit {
     this.radarI2Chart = {
       series: [
         {
-          name: this.UltimoAgno.getFullYear(),
+          name: '',
           data: this.I2Values,
         },
         {
-          name: this.agnoSeleccionado,
+          name: '',
           data: this.I2ValuesOtherYear,
         },
       ],
@@ -815,11 +539,11 @@ export class ChartsComponent implements OnInit {
     this.radarU1Chart = {
       series: [
         {
-          name: this.UltimoAgno.getFullYear(),
+          name: '',
           data: this.U1Values,
         },
         {
-          name: this.agnoSeleccionado,
+          name: '',
           data: this.U1ValuesOtherYear,
         },
       ],
@@ -868,11 +592,11 @@ export class ChartsComponent implements OnInit {
     this.radarU2Chart = {
       series: [
         {
-          name: this.UltimoAgno.getFullYear(),
+          name: '',
           data: this.U2Values,
         },
         {
-          name: this.agnoSeleccionado,
+          name: '',
           data: this.U2ValuesOtherYear,
         },
       ],
@@ -921,8 +645,60 @@ export class ChartsComponent implements OnInit {
     };
   }
 
+  DataInfo() {
+    let subdimensiones = [
+      this.radarL1Chart,
+      this.radarL2Chart,
+      this.radarL3Chart,
+      this.radarL4Chart,
+      this.radarP1Chart,
+      this.radarP2Chart,
+      this.radarI1Chart,
+      this.radarI2Chart,
+      this.radarU1Chart,
+      this.radarU2Chart,
+      this.radarC1Chart,
+    ];
+    for (let i = 0; i < subdimensiones.length; i++) {
+      let longitud = subdimensiones[i].series[0].data.length;
+      let data1 = [];
+      let data2 = [];
+      for (let j = 0; j < longitud; j++) {
+        data1.push(
+          this.obtenerDataSubdimension(
+            `${this.subdimensionesNombre[i].substring(5, 7).toLowerCase()}q${
+              j + 1
+            }`,
+            2022
+          )
+        );
+        data2.push(
+          this.obtenerDataSubdimension(
+            `${this.subdimensionesNombre[i].substring(5, 7).toLowerCase()}q${
+              j + 1
+            }`,
+            this.agnoSeleccionado
+          )
+        );
+      }
+
+      subdimensiones[i].series = [
+        {
+          name: this.UltimoAgno.getFullYear(),
+          data: data1,
+        },
+        {
+          name: this.agnoSeleccionado,
+          data: data2,
+        },
+      ];
+      data1 = [];
+      data2 = [];
+    }
+  }
+
   ngOnInit(): void {
     this.createCharts();
-    this.ObtenerData(this.ciudad);
+    setInterval(() => this.ObtenerData(this.ciudad), 5000);
   }
 }

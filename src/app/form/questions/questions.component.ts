@@ -11,13 +11,13 @@ export class QuestionsComponent implements OnInit {
   constructor(private questionsService: HttpService) {}
   @Input() paginaActual: number | undefined;
   @Input() cantPaginas: number | undefined;
-  @Input() subdimensiones: any | undefined;
+  @Input() subdimensiones: any;
 
-  @Input() ciudad: any | undefined;
-  @Input() Email: any | undefined;
-  @Input() yearsExperience: any | undefined;
-  @Input() role: any | undefined;
-  @Input() challenge: any | undefined;
+  @Input() ciudad: any;
+  @Input() Email: any;
+  @Input() yearsExperience: any;
+  @Input() role: any;
+  @Input() challenge: any;
 
   preguntas: any = {};
   elementos: any = {};
@@ -50,20 +50,6 @@ export class QuestionsComponent implements OnInit {
       );
   }
 
-  ngOnInit(): void {
-    this.questionsService.getPreguntas().subscribe((resp) => {
-      this.preguntas = resp;
-    });
-
-    this.questionsService.getElementos().subscribe((resp) => {
-      this.elementos = resp;
-    });
-
-    this.questionsService.getPreguntasTabla().subscribe((resp) => {
-      this.tablaPreguntas = resp;
-      this.datosObtenidos = true;
-    });
-  }
   postData() {
     const date = new Date();
     let cliente: Clientes = {
@@ -142,9 +128,8 @@ export class QuestionsComponent implements OnInit {
                 let valorRespuesta: any = $(
                   `input[name="${d.preguntaId}a${i}"]:checked`
                 ).val();
-                console.log(valorRespuesta);
-                if (valorRespuesta === undefined) {
-                } else {
+                console.log('es un valor del radioTable ' + valorRespuesta);
+                if (valorRespuesta != undefined) {
                   this.respuesta += valorRespuesta - 0;
                 }
                 cantPreguntas++;
@@ -165,5 +150,20 @@ export class QuestionsComponent implements OnInit {
       }
     });
     sessionStorage.setItem('ciudad', this.ciudad);
+  }
+
+  ngOnInit(): void {
+    this.questionsService.getPreguntas().subscribe((resp) => {
+      this.preguntas = resp;
+    });
+
+    this.questionsService.getElementos().subscribe((resp) => {
+      this.elementos = resp;
+    });
+
+    this.questionsService.getPreguntasTabla().subscribe((resp) => {
+      this.tablaPreguntas = resp;
+      this.datosObtenidos = true;
+    });
   }
 }

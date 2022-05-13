@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as ApexCharts from 'apexcharts';
+import { HttpService } from 'src/app/services/http.service';
 export type RadarChart = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -15,17 +16,26 @@ export type RadarChart = {
   styleUrls: ['./chart-view.component.css'],
 })
 export class ChartViewComponent implements OnInit {
-  public radarChart: Partial<RadarChart> | any;
   @Input() subdimension: string | undefined;
-  constructor() {}
+  @Input() Respuestas: any;
+  @Input() preguntas: any;
+  @Input() titulo: any;
+  @Input() datosChart: any;
 
-  ngOnInit(): void {
-    console.log(this.subdimension);
+  public radarChart: Partial<RadarChart> | any;
+
+  constructor(private questionsService: HttpService) {}
+
+  createChart() {
     this.radarChart = {
       series: [
         {
-          name: 'Value',
-          data: [3, 3, 5, 1, 4, 3, 4, 5],
+          name: '',
+          data: [],
+        },
+        {
+          name: '',
+          data: [],
         },
       ],
       chart: {
@@ -48,10 +58,10 @@ export class ChartViewComponent implements OnInit {
         },
       },
       title: {
-        text: 'Resilience action plan development',
+        text: this.titulo,
       },
       xaxis: {
-        categories: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'],
+        categories: this.preguntas,
       },
       yaxis: {
         min: 0,
@@ -59,5 +69,13 @@ export class ChartViewComponent implements OnInit {
         forceNiceScale: true,
       },
     };
+  }
+  dataInfo() {
+    this.radarChart.series = this.datosChart;
+  }
+
+  ngOnInit(): void {
+    this.createChart();
+    this.dataInfo();
   }
 }
