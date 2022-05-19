@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as ApexCharts from 'apexcharts';
 import { HttpService } from '../services/http.service';
+import * as $ from 'jquery';
 export type RadarChart = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -41,6 +42,17 @@ export class ChartsComponent implements OnInit {
   titulo: string | undefined;
   datosChart: any;
 
+  cambiarAgno() {
+    let valor: any = $('#year').val();
+    this.agnoSeleccionado = parseInt(valor);
+    this.ObtenerData(this.ciudad);
+  }
+  cambiarCiudad() {
+    let valor: any = $('#selCiudad').val();
+    sessionStorage.setItem('ciudad', valor);
+    this.ciudad = sessionStorage.getItem('ciudad');
+    this.ObtenerData(this.ciudad);
+  }
   subdimensionesNombre = [
     'radarL1Chart',
     'radarL2Chart',
@@ -144,7 +156,7 @@ export class ChartsComponent implements OnInit {
       ],
       chart: {
         height: 350,
-        width: 350,
+        width: 550,
         type: 'radar',
       },
       dataLabels: {
@@ -162,10 +174,19 @@ export class ChartsComponent implements OnInit {
         },
       },
       title: {
-        text: 'Municipality, cross-sectorial and multigovernance collaboration',
+        text: [
+          'Municipality, cross-sectorial and multigovernance',
+          'collaboration',
+        ],
       },
       xaxis: {
         categories: ['Q1', 'Q2', 'Q3'],
+        labels: {
+          style: {
+            colors: ['black', 'black', 'black'],
+            fontWeight: 800,
+          },
+        },
       },
       yaxis: {
         min: 0,
@@ -186,7 +207,7 @@ export class ChartsComponent implements OnInit {
       ],
       chart: {
         height: 350,
-        width: 350,
+        width: 550,
         type: 'radar',
       },
       dataLabels: {
@@ -208,6 +229,12 @@ export class ChartsComponent implements OnInit {
       },
       xaxis: {
         categories: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6'],
+        labels: {
+          style: {
+            colors: ['black', 'black', 'black', 'black', 'black', 'black'],
+            fontWeight: 800,
+          },
+        },
       },
       yaxis: {
         min: 0,
@@ -228,7 +255,7 @@ export class ChartsComponent implements OnInit {
       ],
       chart: {
         height: 350,
-        width: 350,
+        width: 550,
         type: 'radar',
       },
       dataLabels: {
@@ -250,6 +277,12 @@ export class ChartsComponent implements OnInit {
       },
       xaxis: {
         categories: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6'],
+        labels: {
+          style: {
+            colors: ['black', 'black', 'black', 'black', 'black', 'black'],
+            fontWeight: 800,
+          },
+        },
       },
       yaxis: {
         min: 0,
@@ -270,7 +303,7 @@ export class ChartsComponent implements OnInit {
       ],
       chart: {
         height: 350,
-        width: 350,
+        width: 550,
         type: 'radar',
       },
       dataLabels: {
@@ -292,6 +325,21 @@ export class ChartsComponent implements OnInit {
       },
       xaxis: {
         categories: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'],
+        labels: {
+          style: {
+            colors: [
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+            ],
+            fontWeight: 800,
+          },
+        },
       },
       yaxis: {
         min: 0,
@@ -313,7 +361,7 @@ export class ChartsComponent implements OnInit {
       ],
       chart: {
         height: 350,
-        width: 350,
+        width: 550,
         type: 'radar',
       },
       dataLabels: {
@@ -331,10 +379,25 @@ export class ChartsComponent implements OnInit {
         },
       },
       title: {
-        text: 'DIAGNOSIS AND ASSESSMENT',
+        text: 'Diagnosis and assesment',
       },
       xaxis: {
         categories: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'],
+        labels: {
+          style: {
+            colors: [
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+            ],
+            fontWeight: 800,
+          },
+        },
       },
       yaxis: {
         min: 0,
@@ -355,7 +418,7 @@ export class ChartsComponent implements OnInit {
       ],
       chart: {
         height: 350,
-        width: 350,
+        width: 550,
         type: 'radar',
       },
       dataLabels: {
@@ -377,68 +440,28 @@ export class ChartsComponent implements OnInit {
       },
       xaxis: {
         categories: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7'],
-      },
-      yaxis: {
-        min: 0,
-        max: 5,
-        forceNiceScale: true,
-      },
-    };
-    this.radarC1Chart = {
-      series: [
-        {
-          name: '',
-          data: this.C1Values,
-        },
-        {
-          name: '',
-          data: this.C1ValuesOtherYear,
-        },
-      ],
-      chart: {
-        height: 350,
-        width: 350,
-        type: 'radar',
-      },
-      dataLabels: {
-        enabled: true,
-      },
-      plotOptions: {
-        radar: {
-          size: 140,
-          polygons: {
-            strokeColors: '#e9e9e9',
-            fill: {
-              colors: ['#f8f8f8', '#fff'],
-            },
+        labels: {
+          style: {
+            colors: [
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+            ],
+            fontWeight: 800,
           },
         },
       },
-      title: {
-        text: 'COLLECTIVE ENGAGEMENT AND AWARENESS',
-      },
-      xaxis: {
-        categories: [
-          'Q1',
-          'Q2',
-          'Q3',
-          'Q4',
-          'Q5',
-          'Q6',
-          'Q7',
-          'Q8',
-          'Q9',
-          'Q10',
-          'Q11',
-          'Q12',
-        ],
-      },
       yaxis: {
         min: 0,
         max: 5,
         forceNiceScale: true,
       },
     };
+
     this.radarI1Chart = {
       series: [
         {
@@ -452,7 +475,7 @@ export class ChartsComponent implements OnInit {
       ],
       chart: {
         height: 350,
-        width: 350,
+        width: 550,
         type: 'radar',
       },
       dataLabels: {
@@ -487,6 +510,25 @@ export class ChartsComponent implements OnInit {
           'Q11',
           'Q12',
         ],
+        labels: {
+          style: {
+            colors: [
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+            ],
+            fontWeight: 800,
+          },
+        },
       },
       yaxis: {
         min: 0,
@@ -507,7 +549,7 @@ export class ChartsComponent implements OnInit {
       ],
       chart: {
         height: 350,
-        width: 350,
+        width: 550,
         type: 'radar',
       },
       dataLabels: {
@@ -529,6 +571,21 @@ export class ChartsComponent implements OnInit {
       },
       xaxis: {
         categories: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'],
+        labels: {
+          style: {
+            colors: [
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+            ],
+            fontWeight: 800,
+          },
+        },
       },
       yaxis: {
         min: 0,
@@ -536,6 +593,7 @@ export class ChartsComponent implements OnInit {
         forceNiceScale: true,
       },
     };
+
     this.radarU1Chart = {
       series: [
         {
@@ -549,7 +607,7 @@ export class ChartsComponent implements OnInit {
       ],
       chart: {
         height: 350,
-        width: 350,
+        width: 550,
         type: 'radar',
       },
       dataLabels: {
@@ -582,6 +640,23 @@ export class ChartsComponent implements OnInit {
           'Q9',
           'Q10',
         ],
+        labels: {
+          style: {
+            colors: [
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+            ],
+            fontWeight: 800,
+          },
+        },
       },
       yaxis: {
         min: 0,
@@ -602,7 +677,7 @@ export class ChartsComponent implements OnInit {
       ],
       chart: {
         height: 350,
-        width: 350,
+        width: 550,
         type: 'radar',
       },
       dataLabels: {
@@ -620,7 +695,7 @@ export class ChartsComponent implements OnInit {
         },
       },
       title: {
-        text: 'LANDSCAPE AND URBAN PLANNING - ENVIRONMENTAL',
+        text: ['Landscape and urban planning', '- ENVIRONMENTAL'],
       },
       xaxis: {
         categories: [
@@ -636,6 +711,99 @@ export class ChartsComponent implements OnInit {
           'Q10',
           'Q11',
         ],
+        labels: {
+          style: {
+            colors: [
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+            ],
+            fontWeight: 800,
+          },
+        },
+      },
+      yaxis: {
+        min: 0,
+        max: 5,
+        forceNiceScale: true,
+      },
+    };
+
+    this.radarC1Chart = {
+      series: [
+        {
+          name: '',
+          data: this.C1Values,
+        },
+        {
+          name: '',
+          data: this.C1ValuesOtherYear,
+        },
+      ],
+      chart: {
+        height: 350,
+        width: 550,
+        type: 'radar',
+      },
+      dataLabels: {
+        enabled: true,
+      },
+      plotOptions: {
+        radar: {
+          size: 140,
+          polygons: {
+            strokeColors: '#e9e9e9',
+            fill: {
+              colors: ['#f8f8f8', '#fff'],
+            },
+          },
+        },
+      },
+      title: {
+        text: 'Colletive engagement and awareness',
+      },
+      xaxis: {
+        categories: [
+          'Q1',
+          'Q2',
+          'Q3',
+          'Q4',
+          'Q5',
+          'Q6',
+          'Q7',
+          'Q8',
+          'Q9',
+          'Q10',
+          'Q11',
+          'Q12',
+        ],
+        labels: {
+          style: {
+            colors: [
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+            ],
+            fontWeight: 800,
+          },
+        },
       },
       yaxis: {
         min: 0,
@@ -697,12 +865,90 @@ export class ChartsComponent implements OnInit {
     }
   }
 
+  preguntaL1: any = [];
+  preguntaL2: any = {};
+  preguntaL3: any = {};
+  preguntaL4: any = {};
+
+  preguntaP1: any = {};
+  preguntaP2: any = {};
+
+  preguntaU1: any = {};
+  preguntaU2: any = {};
+
+  preguntaI1: any = {};
+  preguntaI2: any = {};
+
+  preguntaC1: any = {};
+
+  obtenerPregunta(subdimension: string) {
+    this.questionsService.getPregunta(subdimension).subscribe((resp) => {
+      switch (subdimension) {
+        case 'L1':
+          this.preguntaL1 = resp;
+          break;
+        case 'L2':
+          this.preguntaL2 = resp;
+          break;
+        case 'L3':
+          this.preguntaL3 = resp;
+          break;
+        case 'L4':
+          this.preguntaL4 = resp;
+          break;
+
+        case 'P1':
+          this.preguntaP1 = resp;
+          break;
+        case 'P2':
+          this.preguntaP2 = resp;
+          break;
+
+        case 'U1':
+          this.preguntaU1 = resp;
+          break;
+        case 'U2':
+          this.preguntaU2 = resp;
+          break;
+
+        case 'I1':
+          this.preguntaI1 = resp;
+          break;
+        case 'I2':
+          this.preguntaI2 = resp;
+          break;
+
+        case 'C1':
+          this.preguntaC1 = resp;
+          break;
+      }
+    });
+  }
+
+  llamarAFuncionesPregunta() {
+    this.obtenerPregunta('L1');
+    this.obtenerPregunta('L2');
+    this.obtenerPregunta('L3');
+    this.obtenerPregunta('L4');
+
+    this.obtenerPregunta('P1');
+    this.obtenerPregunta('P2');
+
+    this.obtenerPregunta('U1');
+    this.obtenerPregunta('U2');
+
+    this.obtenerPregunta('I1');
+    this.obtenerPregunta('I2');
+
+    this.obtenerPregunta('C1');
+  }
+
   ngOnInit(): void {
     this.createCharts();
+    this.llamarAFuncionesPregunta();
     setTimeout(() => {
       this.ObtenerData(this.ciudad);
     }, 3000);
-
     setInterval(() => this.ObtenerData(this.ciudad), 600000);
   }
 }

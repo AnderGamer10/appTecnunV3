@@ -34,6 +34,9 @@ export class HttpService {
   public getPreguntas() {
     return this.http.get<Preguntas>(this.API_PREGUNTAS);
   }
+  public getPregunta(subdimension: string) {
+    return this.http.get<Preguntas>(this.API_PREGUNTAS + `/${subdimension}`);
+  }
   public getSubdimensiones() {
     return this.http.get(this.API_SUBDIMENSIONES);
   }
