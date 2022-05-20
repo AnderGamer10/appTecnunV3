@@ -96,16 +96,28 @@ export class ChartsComponent implements OnInit {
         resp.idPregunta === IdPregunta && resp.año === agno
     ).length;
     let valor = 0;
-    for (let i = 0; i < cantidad; i++) {
-      valor += this.Respuestas.filter(
-        (resp: { idPregunta: string; año: number }) =>
-          resp.idPregunta === IdPregunta && resp.año === agno
-      )[i].respuesta;
+    if (cantidad != 0) {
+      for (let i = 0; i < cantidad; i++) {
+        if (i != 0) {
+          let num = this.Respuestas.filter(
+            (resp: { idPregunta: string; año: number }) =>
+              resp.idPregunta === IdPregunta && resp.año === agno
+          )[i].respuesta;
+          if (valor > num) {
+            valor = num;
+          }
+        } else {
+          valor = this.Respuestas.filter(
+            (resp: { idPregunta: string; año: number }) =>
+              resp.idPregunta === IdPregunta && resp.año === agno
+          )[i].respuesta;
+        }
+      }
     }
     if (valor === 0) {
       return 0;
     } else {
-      return Math.floor(valor / cantidad);
+      return Math.floor(valor);
     }
   }
 
