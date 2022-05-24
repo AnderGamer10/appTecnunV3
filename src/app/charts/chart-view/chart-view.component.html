@@ -1,13 +1,14 @@
 {{subdimension}}
 <div class="chart-view">
-    <apx-chart [series]="radarChart.series" [chart]="radarChart.chart" [xaxis]="radarChart.xaxis"
-    [stroke]="radarChart.stroke" [markers]="radarChart.markers" [fill]="radarChart.fill"
-    [title]="radarChart.title" [yaxis]="radarChart.yaxis"></apx-chart>
+    <apx-chart
+      [series]="MaturityLevels.series"
+      [chart]="MaturityLevels.chart"
+      [dataLabels]="MaturityLevels.dataLabels"
+      [plotOptions]="MaturityLevels.plotOptions"
+      [xaxis]="MaturityLevels.xaxis"
+      [title]="MaturityLevels.title"
+    ></apx-chart>
 </div>
-
-
-
-
 
 
 

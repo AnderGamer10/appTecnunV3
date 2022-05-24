@@ -14,7 +14,7 @@
 }
 
 .DimensionTitle{
-    width: 160px;
+    width: 350px;
     margin-left: 50px;
     padding: 10px;
     border-radius: 0.25rem;
@@ -77,4 +77,8 @@ footer{
     justify-content: center;
     display: flex;
     flex-direction: row;
+}
+
+.page-title-right{
+    margin-right: 20px;
 }

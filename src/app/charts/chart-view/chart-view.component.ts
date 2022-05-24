@@ -10,6 +10,14 @@ export type RadarChart = {
   dataLabels: ApexDataLabels;
   yaxis: ApexYAxis;
 };
+export type BarChart = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  title: ApexTitleSubtitle;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  xaxis: ApexXAxis;
+};
 @Component({
   selector: 'app-chart-view',
   templateUrl: './chart-view.component.html',
@@ -22,60 +30,75 @@ export class ChartViewComponent implements OnInit {
   @Input() titulo: any;
   @Input() datosChart: any;
 
-  public radarChart: Partial<RadarChart> | any;
+  public MaturityLevels: Partial<BarChart> | any;
 
+  data: any = {};
   constructor(private questionsService: HttpService) {}
+  ObteniendoData(subdimension: any, ciudad: any) {
+    this.questionsService
+      .getMaturityLevels(subdimension, ciudad)
+      .subscribe((resp) => {
+        this.data = resp;
+        this.createChart();
+        this.actualizarDatos();
+      });
+  }
 
+  actualizarDatos() {
+    let data1 = [];
+    let categories1 = [];
+    for (let i = 0; i < this.data.length; i++) {
+      data1.push(this.data[i].valor);
+      categories1.push(this.data[i].nombreLevel);
+    }
+    this.MaturityLevels.xaxis = {
+      categories: categories1,
+      min: 0,
+      max: 1,
+    };
+    this.MaturityLevels.series = [
+      {
+        name: 'Maturity Levels',
+        data: data1,
+      },
+    ];
+  }
   createChart() {
-    this.radarChart = {
+    this.MaturityLevels = {
       series: [
         {
-          name: '',
-          data: [],
-        },
-        {
-          name: '',
-          data: [],
+          name: 'Maturity Levels',
+          data: [0, 0],
         },
       ],
       chart: {
-        height: 350,
-        width: 350,
-        type: 'radar',
-      },
-      dataLabels: {
-        enabled: true,
+        type: 'bar',
+        height: 550,
+        width: 650,
       },
       plotOptions: {
-        radar: {
-          size: 140,
-          polygons: {
-            strokeColors: '#e9e9e9',
-            fill: {
-              colors: ['#f8f8f8', '#fff'],
-            },
-          },
+        bar: {
+          horizontal: true,
         },
       },
       title: {
-        text: this.titulo,
+        text: 'Maturity Levels',
+      },
+      dataLabels: {
+        enabled: false,
       },
       xaxis: {
-        categories: this.preguntas,
-      },
-      yaxis: {
+        categories: ['S', 'M'],
         min: 0,
-        max: 5,
-        forceNiceScale: true,
+        max: 1,
       },
     };
   }
-  dataInfo() {
-    this.radarChart.series = this.datosChart;
-  }
+  // dataInfo() {
+  //   this.radarChart.series = this.datosChart;
+  // }
 
   ngOnInit(): void {
-    this.createChart();
-    this.dataInfo();
+    this.ObteniendoData(this.subdimension, sessionStorage.getItem('ciudad'));
   }
 }
