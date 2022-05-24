@@ -1,4 +1,15 @@
 <div *ngIf="_router.url === '/form'" id="mainForm">
+    <div id="DoneInfo" class="bg-light"> 
+        <div>
+            <p>See Information:</p> 
+            <select class="form-select" (change)="cambiarCiudad()" name="ciudad" id="selCiudad" >
+                <option value="Donostia" selected>Donostia</option>
+                <option value="Valencia">Valencia</option>
+                <option value="Sevilla">Sevilla</option>
+            </select>
+            <button type="button" class="btn btn-white" routerLink="/dashboard">Go</button>
+        </div>
+    </div>
     <div id="divQuestions" class="bg-light">
         <div id="header">
             <img src="./assets/images/logo.png" alt="">

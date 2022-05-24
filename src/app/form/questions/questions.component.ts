@@ -150,10 +150,7 @@ export class QuestionsComponent implements OnInit {
       }
     });
     sessionStorage.setItem('ciudad', this.ciudad);
-    this.Euristica();
   }
-
-  Euristica() {}
 
   ngOnInit(): void {
     this.questionsService.getPreguntas().subscribe((resp) => {

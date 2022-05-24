@@ -57,7 +57,7 @@
                             </div>
                             <div id="L-Dimension">
                                 <div class="DimensionTitle bg-secondary bg-soft">
-                                    <h4 class="text-light mb-sm-0">LEADERSHIP &amp; GOVERNANCE</h4>
+                                    <h4 class="text-light mb-sm-0">Leadership &amp; governance</h4>
                                 </div>
                                 <div class="d-flex flex-wrap justify-content-center">
                                     <div class="chart-view">
@@ -135,7 +135,7 @@
                             <div id="P-Dimension">
                                 <hr>
                                 <div class="DimensionTitle bg-secondary bg-soft">
-                                    <h4 class="text-light mb-sm-0">P Dimension</h4>
+                                    <h4 class="text-light mb-sm-0">Preparedness</h4>
                                 </div>
                                 <div class="d-flex flex-wrap justify-content-center">
                                     <div class="chart-view">
@@ -177,7 +177,7 @@
                             <div id="I-Dimension">
                                 <hr>
                                 <div class="DimensionTitle bg-secondary bg-soft">
-                                    <h4 class="text-light mb-sm-0">I Dimension</h4>
+                                    <h4 class="text-light mb-sm-0">Infraestructure &amp; Resources</h4>
                                 </div>
                                 <div class="d-flex flex-wrap justify-content-center">
                                     <div class="chart-view">
@@ -219,7 +219,7 @@
                             <div id="U-Dimension">
                                 <hr>
                                 <div class="DimensionTitle bg-secondary bg-soft">
-                                    <h4 class="text-light mb-sm-0">U Dimension</h4>
+                                    <h4 class="text-light mb-sm-0">Landscape and urban planning</h4>
                                 </div>
                                 <div class="d-flex flex-wrap justify-content-center">
                                     <div class="chart-view">
@@ -261,7 +261,7 @@
                             <div id="C-Dimension">
                                 <hr>
                                 <div class="DimensionTitle bg-secondary bg-soft">
-                                    <h4 class="text-light mb-sm-0">C Dimension</h4>
+                                    <h4 class="text-light mb-sm-0">Cooperation</h4>
                                 </div>
                                 <div class="d-flex flex-wrap justify-content-center">
                                     <div class="chart-view">
@@ -277,6 +277,23 @@
                                             <div *ngFor="let item of radarC1Chart.xaxis.categories;let i=index">
                                                 <div *ngIf="item">
                                                     <p>{{item}}: {{preguntaC1[i].pregunta}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="chart-view">
+                                        <apx-chart [series]="radarC2Chart.series" [chart]="radarC2Chart.chart"
+                                            [xaxis]="radarC2Chart.xaxis" [stroke]="radarC2Chart.stroke"
+                                            [markers]="radarC2Chart.markers" [fill]="radarC2Chart.fill"
+                                            [title]="radarC2Chart.title" [yaxis]="radarC2Chart.yaxis"></apx-chart>
+                                        <button
+                                            (click)="cambiarVista('C2',radarC2Chart.title.text,radarC2Chart.series,radarC2Chart.xaxis.categories)"
+                                            type="button" class="btn btn-primary">More
+                                            info</button>
+                                        <div class="legend">
+                                            <div *ngFor="let item of radarC2Chart.xaxis.categories;let i=index">
+                                                <div *ngIf="item">
+                                                    <p>{{item}}: {{preguntaC2[i].pregunta}} </p>
                                                 </div>
                                             </div>
                                         </div>

@@ -28,6 +28,7 @@ export class ChartsComponent implements OnInit {
   public radarU1Chart: Partial<RadarChart> | any;
   public radarU2Chart: Partial<RadarChart> | any;
   public radarC1Chart: Partial<RadarChart> | any;
+  public radarC2Chart: Partial<RadarChart> | any;
 
   constructor(private questionsService: HttpService) {}
   ciudad: any = sessionStorage.getItem('ciudad');
@@ -65,6 +66,7 @@ export class ChartsComponent implements OnInit {
     'radarU1Chart',
     'radarU2Chart',
     'radarC1Chart',
+    'radarC2Chart',
   ];
 
   cambiarVista(
@@ -147,6 +149,9 @@ export class ChartsComponent implements OnInit {
 
   C1Values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   C1ValuesOtherYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+  C2Values = [0, 0];
+  C2ValuesOtherYear = [0, 0];
 
   U1Values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   U1ValuesOtherYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -823,6 +828,55 @@ export class ChartsComponent implements OnInit {
         forceNiceScale: true,
       },
     };
+
+    this.radarC2Chart = {
+      series: [
+        {
+          name: '',
+          data: this.C2Values,
+        },
+        {
+          name: '',
+          data: this.C2ValuesOtherYear,
+        },
+      ],
+      chart: {
+        height: 350,
+        width: 550,
+        type: 'radar',
+      },
+      dataLabels: {
+        enabled: true,
+      },
+      plotOptions: {
+        radar: {
+          size: 140,
+          polygons: {
+            strokeColors: '#e9e9e9',
+            fill: {
+              colors: ['#f8f8f8', '#fff'],
+            },
+          },
+        },
+      },
+      title: {
+        text: 'Involvement in resilience networks of cities',
+      },
+      xaxis: {
+        categories: ['Q1', 'Q2'],
+        labels: {
+          style: {
+            colors: ['black', 'black'],
+            fontWeight: 800,
+          },
+        },
+      },
+      yaxis: {
+        min: 0,
+        max: 5,
+        forceNiceScale: true,
+      },
+    };
   }
 
   DataInfo() {
@@ -838,6 +892,7 @@ export class ChartsComponent implements OnInit {
       this.radarU1Chart,
       this.radarU2Chart,
       this.radarC1Chart,
+      this.radarC2Chart,
     ];
     for (let i = 0; i < subdimensiones.length; i++) {
       let longitud = subdimensiones[i].series[0].data.length;
@@ -892,6 +947,7 @@ export class ChartsComponent implements OnInit {
   preguntaI2: any = {};
 
   preguntaC1: any = {};
+  preguntaC2: any = {};
 
   obtenerPregunta(subdimension: string) {
     this.questionsService.getPregunta(subdimension).subscribe((resp) => {
@@ -933,6 +989,9 @@ export class ChartsComponent implements OnInit {
         case 'C1':
           this.preguntaC1 = resp;
           break;
+        case 'C2':
+          this.preguntaC2 = resp;
+          break;
       }
     });
   }
@@ -953,6 +1012,29 @@ export class ChartsComponent implements OnInit {
     this.obtenerPregunta('I2');
 
     this.obtenerPregunta('C1');
+    this.obtenerPregunta('C2');
+  }
+
+  actualizarNivelesDeMadured() {
+    let subdimensiones = [
+      'L1',
+      'L2',
+      'L3',
+      'L4',
+      'P1',
+      'P2',
+      'U1',
+      'U2',
+      'I1',
+      'I2',
+      'C1',
+      'C2',
+    ];
+    for (let i = 0; i < subdimensiones.length; i++) {
+      this.questionsService
+        .getMaturityLevels(subdimensiones[i], sessionStorage.getItem('ciudad'))
+        .subscribe((resp) => {});
+    }
   }
 
   ngOnInit(): void {
@@ -961,6 +1043,7 @@ export class ChartsComponent implements OnInit {
     setTimeout(() => {
       this.ObtenerData(this.ciudad);
     }, 3000);
+    this.actualizarNivelesDeMadured();
     setInterval(() => this.ObtenerData(this.ciudad), 600000);
   }
 }

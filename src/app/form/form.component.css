@@ -2,8 +2,8 @@
 #mainForm {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
-
 /* Div preguntas --> Todo aqui dentro */
 #divQuestions {
     background-color: rgba(0, 0, 0, 0.03);
@@ -181,3 +181,26 @@ ul {
     }
 }
 
+#DoneInfo{
+    height: 50px;
+    width: auto;
+    position: absolute;
+    margin-top: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+}
+#DoneInfo div{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+}
+#DoneInfo div p {
+    margin: auto;
+    margin-left: 5px;
+}
+#DoneInfo div button{
+    border: 1px solid;
+    border-radius: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+}

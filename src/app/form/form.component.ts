@@ -82,8 +82,16 @@ export class FormComponent implements OnInit {
     this.role = value;
   }
 
+  cambiarCiudad() {
+    let valor: any = $('#selCiudad').val();
+    if (valor != '') {
+      sessionStorage.setItem('ciudad', valor);
+      this.ciudad = sessionStorage.getItem('ciudad');
+    }
+  }
+
   ngOnInit(): void {
-    sessionStorage.setItem('ciudad', '');
+    sessionStorage.setItem('ciudad', 'Donostia');
     this.questionsService.getSubdimensiones().subscribe((resp) => {
       this.subInfo = resp;
       for (let i = 0; i < this.subInfo.length; i++) {

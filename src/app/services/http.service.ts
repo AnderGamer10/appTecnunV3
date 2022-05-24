@@ -18,6 +18,7 @@ export class HttpService {
   private API_SUBDIMENSIONES = 'https://localhost:5001/api/Subdimensiones';
   private API_ELEMENTOS = 'https://localhost:5001/api/Elementos';
   private API_PREGUNTASTABLA = 'https://localhost:5001/api/PreguntasTablas';
+  private API_MATURITYLEVELS = 'https://localhost:5001/api/Maturity_levels';
   constructor(private http: HttpClient) {}
 
   public postClientData(cliente: Clientes): Observable<Clientes> {
@@ -45,5 +46,10 @@ export class HttpService {
   }
   public getPreguntasTabla() {
     return this.http.get<ElementosPreguntas>(this.API_PREGUNTASTABLA);
+  }
+  public getMaturityLevels(subdimension: string, ciudad: any) {
+    return this.http.get(
+      this.API_MATURITYLEVELS + `/${subdimension}` + `/${ciudad}`
+    );
   }
 }
