@@ -94,9 +94,6 @@ export class ChartViewComponent implements OnInit {
       },
     };
   }
-  // dataInfo() {
-  //   this.radarChart.series = this.datosChart;
-  // }
 
   ngOnInit(): void {
     this.ObteniendoData(this.subdimension, sessionStorage.getItem('ciudad'));

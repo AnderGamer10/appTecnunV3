@@ -60,6 +60,11 @@
                         </mat-label>
                         <textarea [(ngModel)]="challenge" matInput placeholder="Construction..." id="challenge" [ngModelOptions]="{standalone: true}"></textarea>
                     </mat-form-field>
+                    <div *ngIf="todoRellenado" id="Fill">
+                        <p>
+                            Fill in the fields
+                        </p>
+                    </div>
                 </div>
                 <app-questions [paginaActual]="paginaActual" [cantPaginas]="cantPaginas" [subdimensiones]="subdimensiones" [Email]="Email" [ciudad]="ciudad" [role]="role" [yearsExperience]="yearsExperience" [challenge]="challenge"></app-questions>
             </form>
