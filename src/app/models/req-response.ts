@@ -29,3 +29,12 @@ export interface dataInfo {
   idPregunta: String;
   respuesta: Number;
 }
+
+export interface Maturity {
+  id: number;
+  nombreLevel: String;
+  subdimension: String;
+  maxPregunta: number;
+  valor: number;
+  ciudad: String;
+}

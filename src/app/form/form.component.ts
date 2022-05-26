@@ -27,13 +27,24 @@ export class FormComponent implements OnInit {
   subdimensiones: any = [];
   cantPaginas = 2;
   paginaActual = 0;
+
+  todoRellenado: boolean = false;
   avPag(): void {
-    if (this.paginaActual < this.cantPaginas) {
-      this.paginaActual++;
+    if (
+      this.Email.value != '' &&
+      this.yearsExperience.value != '' &&
+      this.professionRole.value != '' &&
+      this.cityName.value != ''
+    ) {
+      if (this.paginaActual < this.cantPaginas) {
+        this.paginaActual++;
+      }
+      (<HTMLInputElement>document.getElementById('file')).value = `${
+        (100 / this.cantPaginas) * this.paginaActual
+      }`;
+    } else {
+      this.todoRellenado = true;
     }
-    (<HTMLInputElement>document.getElementById('file')).value = `${
-      (100 / this.cantPaginas) * this.paginaActual
-    }`;
   }
   rePag(): void {
     if (this.paginaActual > 0) {
