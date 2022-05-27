@@ -14,7 +14,6 @@
 <!-- Preguntas -->
 <div *ngFor="let subs of subdimensiones; index as i">
     <div *ngIf="datosObtenidos" id="{{subs}}" [ngStyle]="{'display': paginaActual === i+2 ? 'block' : 'none'}">
-        <p>{{subs}}</p>
         <div *ngFor="let mainItem of filtrarSubdimension(subs)"> 
             <h3><b>{{mainItem.pregunta}}</b></h3>
             <div *ngIf="mainItem.tipoPregunta === 'table'">

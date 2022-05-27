@@ -3532,8 +3532,164 @@ export class ChartsComponent implements OnInit {
             });
           break;
         // C2 Heuristica ------------------------------------------------------
-
-        // ********************************************************************************************
+        case 'c2q1':
+          this.questionsService
+            .getMaturityByLevel('C2M1', sessionStorage.getItem('ciudad'))
+            .subscribe((resp) => {
+              var data: any = resp;
+              var respuesta: any = {
+                id: data[0].id,
+                nombreLevel: data[0].nombreLevel,
+                subdimension: data[0].subdimension,
+                maxPregunta: data[0].maxPregunta,
+                valor: valor,
+                ciudad: data[0].ciudad,
+              };
+              this.questionsService
+                .putMaturityByLevel('C2M1', respuesta)
+                .subscribe();
+            });
+          this.questionsService
+            .getMaturityByLevel('C2R1', sessionStorage.getItem('ciudad'))
+            .subscribe((resp) => {
+              var data: any = resp;
+              var respuesta: any = {
+                id: data[0].id,
+                nombreLevel: data[0].nombreLevel,
+                subdimension: data[0].subdimension,
+                maxPregunta: data[0].maxPregunta,
+                valor: valor,
+                ciudad: data[0].ciudad,
+              };
+              this.questionsService
+                .putMaturityByLevel('C2R1', respuesta)
+                .subscribe();
+            });
+          break;
+        case 'c2q2':
+          this.questionsService
+            .getMaturityByLevel('C2R1', sessionStorage.getItem('ciudad'))
+            .subscribe((resp) => {
+              var data: any = resp;
+              var respuesta: any = {
+                id: data[0].id,
+                nombreLevel: data[0].nombreLevel,
+                subdimension: data[0].subdimension,
+                maxPregunta: data[0].maxPregunta,
+                valor: valor + data[0].valor,
+                ciudad: data[0].ciudad,
+              };
+              this.questionsService
+                .putMaturityByLevel('C2R1', respuesta)
+                .subscribe();
+            });
+          break;
+        case 'c2q3':
+          this.questionsService
+            .getMaturityByLevel('C2R1', sessionStorage.getItem('ciudad'))
+            .subscribe((resp) => {
+              var data: any = resp;
+              var respuesta: any = {
+                id: data[0].id,
+                nombreLevel: data[0].nombreLevel,
+                subdimension: data[0].subdimension,
+                maxPregunta: data[0].maxPregunta,
+                valor: valor + data[0].valor,
+                ciudad: data[0].ciudad,
+              };
+              this.questionsService
+                .putMaturityByLevel('C2R1', respuesta)
+                .subscribe();
+            });
+          this.questionsService
+            .getMaturityByLevel('C2A1', sessionStorage.getItem('ciudad'))
+            .subscribe((resp) => {
+              var data: any = resp;
+              var respuesta: any = {
+                id: data[0].id,
+                nombreLevel: data[0].nombreLevel,
+                subdimension: data[0].subdimension,
+                maxPregunta: data[0].maxPregunta,
+                valor: valor,
+                ciudad: data[0].ciudad,
+              };
+              this.questionsService
+                .putMaturityByLevel('C2A1', respuesta)
+                .subscribe();
+            });
+          break;
+        case 'c2q4':
+          this.questionsService
+            .getMaturityByLevel('C2A2', sessionStorage.getItem('ciudad'))
+            .subscribe((resp) => {
+              var data: any = resp;
+              var respuesta: any = {
+                id: data[0].id,
+                nombreLevel: data[0].nombreLevel,
+                subdimension: data[0].subdimension,
+                maxPregunta: data[0].maxPregunta,
+                valor: valor,
+                ciudad: data[0].ciudad,
+              };
+              this.questionsService
+                .putMaturityByLevel('C2A2', respuesta)
+                .subscribe();
+            });
+          break;
+        case 'c2q5':
+          this.questionsService
+            .getMaturityByLevel('C2T1', sessionStorage.getItem('ciudad'))
+            .subscribe((resp) => {
+              var data: any = resp;
+              var respuesta: any = {
+                id: data[0].id,
+                nombreLevel: data[0].nombreLevel,
+                subdimension: data[0].subdimension,
+                maxPregunta: data[0].maxPregunta,
+                valor: valor,
+                ciudad: data[0].ciudad,
+              };
+              this.questionsService
+                .putMaturityByLevel('C2T1', respuesta)
+                .subscribe();
+            });
+          break;
+        case 'c2q6':
+          this.questionsService
+            .getMaturityByLevel('C2T1', sessionStorage.getItem('ciudad'))
+            .subscribe((resp) => {
+              var data: any = resp;
+              var respuesta: any = {
+                id: data[0].id,
+                nombreLevel: data[0].nombreLevel,
+                subdimension: data[0].subdimension,
+                maxPregunta: data[0].maxPregunta,
+                valor: valor + data[0].valor,
+                ciudad: data[0].ciudad,
+              };
+              this.questionsService
+                .putMaturityByLevel('C2T1', respuesta)
+                .subscribe();
+            });
+          break;
+        case 'c2q7':
+          this.questionsService
+            .getMaturityByLevel('C2T1', sessionStorage.getItem('ciudad'))
+            .subscribe((resp) => {
+              var data: any = resp;
+              var respuesta: any = {
+                id: data[0].id,
+                nombreLevel: data[0].nombreLevel,
+                subdimension: data[0].subdimension,
+                maxPregunta: data[0].maxPregunta,
+                valor: valor + data[0].valor,
+                ciudad: data[0].ciudad,
+              };
+              this.questionsService
+                .putMaturityByLevel('C2T1', respuesta)
+                .subscribe();
+            });
+          break;
       }
       return Math.floor(valor);
     }
@@ -3567,8 +3723,8 @@ export class ChartsComponent implements OnInit {
   C1Values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   C1ValuesOtherYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-  C2Values = [0, 0];
-  C2ValuesOtherYear = [0, 0];
+  C2Values = [0, 0, 0, 0, 0, 0, 0];
+  C2ValuesOtherYear = [0, 0, 0, 0, 0, 0, 0];
 
   U1Values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   U1ValuesOtherYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -4280,10 +4436,18 @@ export class ChartsComponent implements OnInit {
         text: 'Involvement in resilience networks of cities',
       },
       xaxis: {
-        categories: ['Q1', 'Q2'],
+        categories: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7'],
         labels: {
           style: {
-            colors: ['black', 'black'],
+            colors: [
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+              'black',
+            ],
             fontWeight: 800,
           },
         },
