@@ -9,16 +9,17 @@ import { dataInfo, Clientes } from '../../models/req-response';
 })
 export class QuestionsComponent implements OnInit {
   constructor(private questionsService: HttpService) {}
+  // Obteniendo datos de el componente padre
   @Input() paginaActual: number | undefined;
   @Input() cantPaginas: number | undefined;
   @Input() subdimensiones: any;
-
   @Input() ciudad: any;
   @Input() Email: any;
   @Input() yearsExperience: any;
   @Input() role: any;
   @Input() challenge: any;
 
+  // Variables
   preguntas: any = {};
   elementos: any = {};
   tablaPreguntas: any = {};
@@ -50,6 +51,7 @@ export class QuestionsComponent implements OnInit {
       );
   }
 
+  // Funcion para obtener los datos y postearlos a la base de datos
   postData() {
     const date = new Date();
     let cliente: Clientes = {
