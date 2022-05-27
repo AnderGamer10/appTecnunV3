@@ -48,7 +48,7 @@ export class ChartViewComponent implements OnInit {
     let data1 = [];
     let categories1 = [];
     for (let i = 0; i < this.data.length; i++) {
-      data1.push(this.data[i].valor);
+      data1.push(this.data[i].valor / this.data[i].maxPregunta);
       categories1.push(this.data[i].nombreLevel);
     }
     this.MaturityLevels.xaxis = {

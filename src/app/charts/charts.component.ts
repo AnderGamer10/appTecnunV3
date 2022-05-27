@@ -17,6 +17,7 @@ export type RadarChart = {
   styleUrls: ['./charts.component.css'],
 })
 export class ChartsComponent implements OnInit {
+  // Para los graficos
   public radarL1Chart: Partial<RadarChart> | any;
   public radarL2Chart: Partial<RadarChart> | any;
   public radarL3Chart: Partial<RadarChart> | any;
@@ -31,6 +32,7 @@ export class ChartsComponent implements OnInit {
   public radarC2Chart: Partial<RadarChart> | any;
 
   constructor(private questionsService: HttpService) {}
+  // Variables
   ciudad: any = sessionStorage.getItem('ciudad');
   vistaMain: Boolean = true;
   DashboardView: string = 'Main';
@@ -43,11 +45,13 @@ export class ChartsComponent implements OnInit {
   titulo: string | undefined;
   datosChart: any;
 
+  // Funcion para el filtro de seleccion de año
   cambiarAgno() {
     let valor: any = $('#year').val();
     this.agnoSeleccionado = parseInt(valor);
     this.ObtenerData(this.ciudad);
   }
+  // Funcion para cambiar de ciudad y mostrar datos de otra.
   cambiarCiudad() {
     let valor: any = $('#selCiudad').val();
     sessionStorage.setItem('ciudad', valor);
@@ -69,6 +73,7 @@ export class ChartsComponent implements OnInit {
     'radarC2Chart',
   ];
 
+  // Funcion para mostrar el componente de maturity_level
   cambiarVista(
     subdimension: string,
     titulo: string,
@@ -82,6 +87,7 @@ export class ChartsComponent implements OnInit {
     this.DashboardView = subdimension;
   }
 
+  // Funcion para obtener todos los datos
   async ObtenerData(ciudad: string) {
     await this.questionsService.getRespuestas().subscribe((resp) => {
       this.RespuestasAFiltrar = resp;
@@ -92,7 +98,8 @@ export class ChartsComponent implements OnInit {
     });
   }
 
-  obtenerDataSubdimension(IdPregunta: string, agno: number) {
+  // Obtenemos los datos de la pregunta y actualizamos la heuristica
+  obtenerDataPregunta(IdPregunta: string, agno: number) {
     let cantidad = this.Respuestas.filter(
       (resp: { idPregunta: string; año: number }) =>
         resp.idPregunta === IdPregunta && resp.año === agno
@@ -119,7 +126,7 @@ export class ChartsComponent implements OnInit {
     if (valor === 0) {
       return 0;
     } else {
-      // console.log(IdPregunta + ' ' + valor);
+      // Zona de heuristica
       switch (IdPregunta) {
         // L1 Heuristica ------------------------------------------------------
         case 'l1q1':
@@ -1733,7 +1740,7 @@ export class ChartsComponent implements OnInit {
           }
           break;
         case 'p2q5':
-          if (valor < 4) {
+          if (valor > 2) {
             this.questionsService
               .getMaturityByLevel('P2A2', sessionStorage.getItem('ciudad'))
               .subscribe((resp) => {
@@ -3532,6 +3539,7 @@ export class ChartsComponent implements OnInit {
     }
   }
 
+  // Variables y funcion necesarias para los graficos
   L1Values = [0, 0, 0];
   L1ValuesOtherYear = [0, 0, 0];
 
@@ -4309,7 +4317,7 @@ export class ChartsComponent implements OnInit {
       let data2 = [];
       for (let j = 0; j < longitud; j++) {
         data1.push(
-          this.obtenerDataSubdimension(
+          this.obtenerDataPregunta(
             `${this.subdimensionesNombre[i].substring(5, 7).toLowerCase()}q${
               j + 1
             }`,
@@ -4317,7 +4325,7 @@ export class ChartsComponent implements OnInit {
           )
         );
         data2.push(
-          this.obtenerDataSubdimension(
+          this.obtenerDataPregunta(
             `${this.subdimensionesNombre[i].substring(5, 7).toLowerCase()}q${
               j + 1
             }`,
@@ -4341,6 +4349,7 @@ export class ChartsComponent implements OnInit {
     }
   }
 
+  // Variables y funcion para obtener las preguntas y ponerlas como leyenda
   preguntaL1: any = [];
   preguntaL2: any = {};
   preguntaL3: any = {};
@@ -4404,7 +4413,8 @@ export class ChartsComponent implements OnInit {
       }
     });
   }
-  ActualizarMadurez() {
+  // Funcion para poner la madurez a 0 y no haya fallos al actualizarlo
+  MadurezACero() {
     this.questionsService.getMaturityLevelsAll().subscribe((resp) => {
       var data: any = resp;
       for (let i = 0; i < data.length; i++) {
@@ -4423,7 +4433,7 @@ export class ChartsComponent implements OnInit {
     });
   }
   llamarAFuncionesPregunta() {
-    this.ActualizarMadurez();
+    this.MadurezACero();
     this.obtenerPregunta('L1');
     this.obtenerPregunta('L2');
     this.obtenerPregunta('L3');
