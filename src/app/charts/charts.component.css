@@ -82,3 +82,6 @@ footer{
 .page-title-right{
     margin-right: 20px;
 }
+.page-title-right ol a{
+    margin-right: 15px;
+}
